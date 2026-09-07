@@ -16,7 +16,7 @@ what it's worth (from the customer).
 
 ## 2. Cost floor
 
-From `skills/modeling/references/profit-modeling.md`:
+From `${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/profit-modeling.md`:
 
 | Driver | Per-unit cost | Share |
 | --- | --- | --- |

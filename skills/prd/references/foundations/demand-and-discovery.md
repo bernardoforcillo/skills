@@ -39,7 +39,7 @@ Across published experimentation programmes at companies large enough to measure
 of shipped changes move the target metric by nothing. Whatever the exact fraction in your context,
 the shape holds: **the prior on any given feature working is well under one half.**
 
-Two consequences fall out of `skills/operating-model/references/impact-and-prioritization.md`'s
+Two consequences fall out of `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/impact-and-prioritization.md`'s
 expected-value form:
 
 - **Cost-to-find-out dominates.** When p(works) is low and uncertain, the term you can actually
@@ -58,14 +58,14 @@ hypothetical interviews contains exactly the information of three hypothetical i
 
 Hence the gate: evidence first, document second. And hence the honest form when evidence is
 missing — an assumption written *as* an assumption, with what would test it, rather than laundered
-into a requirement (`skills/operating-model/references/evidence-and-experimentation.md`).
+into a requirement (`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`).
 
 ## Why discovery is continuous rather than a phase
 
 Demand moves: substitutes appear, expectations rise with whatever else your users touch, the job
 changes shape when the surrounding workflow does. So a research finding is a **dated observation**,
 not a permanent fact — the decay argument in
-`skills/operating-model/references/foundations/knowledge-and-decay.md`
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/knowledge-and-decay.md`
 applies to user research exactly as it applies to documentation, and with a shorter half-life than
 most teams assume.
 
@@ -78,7 +78,7 @@ moment that is already passing.
 The instrument that raises p cheaply is the one that produces *behaviour* without building the
 thing: a concierge run done by hand, a pre-sale, a landing page with a real price and a real
 button, an offer made to ten specific people. Their value is the value-of-information result in
-`skills/operating-model/references/foundations/uncertainty-and-information.md`
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/uncertainty-and-information.md`
 — they can change the decision, so they are worth paying for.
 
 Their limits are as sharp as their value, and skipping them is how a probe becomes theatre:
@@ -89,7 +89,7 @@ Their limits are as sharp as their value, and skipping them is how a probe becom
   selected on responsiveness to you.
 - **A fake door burns trust proportional to how convincing it was.** It's a one-time instrument in
   a given audience, and the trust it spends is charged to the growth engine
-  (`skills/growth/references/foundations/loops-and-saturation.md`).
+  (`${CLAUDE_PLUGIN_ROOT}/skills/growth/references/foundations/loops-and-saturation.md`).
 
 ## Scope is set by the question, not by the feature list
 

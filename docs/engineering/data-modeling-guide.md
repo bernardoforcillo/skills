@@ -6,7 +6,7 @@ system, which is why it deserves the deliberation the `modeling` skill reserves 
 ## Start from the domain, not the screens
 
 - Model entities, their identity, and their invariants first — the `modeling` skill's
-  `skills/modeling/references/structural-views.md` for aggregates and multiplicities. Screens change; the domain
+  `${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/structural-views.md` for aggregates and multiplicities. Screens change; the domain
   changes slowly.
 - **Draw the ER diagram before the first migration.** Cardinality on every relationship. The
   questions it forces — can this be empty, can there be two, what happens to the children — are the
@@ -39,7 +39,7 @@ system, which is why it deserves the deliberation the `modeling` skill reserves 
 - **Every migration must be reversible or explicitly declared irreversible** in its own header. An
   irreversible migration is a one-way door and takes an ADR.
 - **Test the restore, not the backup.** A backup whose restore has never been run is a belief
-  (`operating-model`'s `skills/operating-model/references/reliability-and-incidents.md`).
+  (`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md`).
 
 ## Growth and cost
 

@@ -18,6 +18,7 @@
     "growth",
     "gtm"
   ],
+  "hooks": "./hooks/cursor-hooks.json",
   "category": "developer-tools",
   "tags": [
     "architecture",

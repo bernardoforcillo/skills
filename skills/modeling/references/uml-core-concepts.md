@@ -19,7 +19,7 @@ doesn't exist yet in practice, whatever the code says.
 
 **Decomposition** — a system is understood by splitting it into parts with sparse interaction
 between them (Simon's near-decomposability, in `operating-model`'s
-`skills/operating-model/references/foundations/complexity-and-coupling.md`). A decomposition whose parts all talk to all
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/complexity-and-coupling.md`). A decomposition whose parts all talk to all
 the others hasn't decomposed anything: it has added names.
 
 **Generalization** — shared structure named once. Powerful and over-used: inheritance in a model

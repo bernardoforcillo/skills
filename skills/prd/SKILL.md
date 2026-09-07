@@ -10,8 +10,9 @@ description: Use when the user wants to define a new product feature — turn a 
 This skill is the **facilitator**: it runs in the main loop, holds the dialogue with the user,
 and owns the two human gates (problem-lock, PRD-approval). It never does the heavy research
 itself — for each design-thinking phase that needs real digging, it dispatches the
-`product-strategist` subagent (`Task` tool, `subagent_type: "product-strategist"`,
-`readonly` — that agent edits nothing) and relays a condensed version of what comes back.
+`product-strategist` subagent (`Agent` tool on Claude Code, `Task` tool on Cursor;
+`subagent_type: "product-strategist"`, no worktree / `readonly` — that agent edits nothing)
+and relays a condensed version of what comes back.
 The output is a single file, `docs/superpowers/prd/YYYY-MM-DD-<feature>.md`, written using the
 template below. Once the user approves it, this skill hands off to `superpowers:brainstorming`
 to turn the approved PRD into a technical spec, which then feeds `writing-plans`.
@@ -37,9 +38,9 @@ stated fallback, and the report says which path was taken:
 
 | Missing | Fallback |
 | --- | --- |
-| `superpowers:brainstorming` | Write the technical spec inline from the approved PRD, and dispatch `software-architect` for the shape review that brainstorming would otherwise have driven |
-| `feature-dev:code-architect` | Dispatch `software-architect` for the feasibility read instead; it carries the scaling and code-organization references and can answer the same question at lower resolution |
-| `superpowers:systematic-debugging` | Handle the bug case directly — reproduce, isolate, fix, add the regression test — and record it per `skills/operating-model/references/reliability-and-incidents.md` |
+| `superpowers:brainstorming` | Write the technical spec inline from the approved PRD, and dispatch `copilot:software-architect` (Claude Code) or `software-architect` (Cursor) for the shape review that brainstorming would otherwise have driven |
+| `feature-dev:code-architect` | Dispatch `copilot:software-architect` (Claude Code) or `software-architect` (Cursor) for the feasibility read instead; it carries the scaling and code-organization references and can answer the same question at lower resolution |
+| `superpowers:systematic-debugging` | Handle the bug case directly — reproduce, isolate, fix, add the regression test — and record it per `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md` |
 
 Check availability before promising a hand-off, not after the PRD is approved.
 
@@ -186,7 +187,7 @@ hand-off happens, then filled in with a link.
   user; never dump every raw sub-report into the conversation.
 - **Rank and gate with the operating model.** Competing bets get ordered by expected value, and
   every bet that leaves this skill carries a kill criterion written before work starts — see the
-  `operating-model` skill's `skills/operating-model/references/impact-and-prioritization.md`. A PRD with no stated
+  `operating-model` skill's `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/impact-and-prioritization.md`. A PRD with no stated
   condition under which the feature gets stopped isn't finished.
 - **Never commit.** The PRD lives at `docs/superpowers/prd/YYYY-MM-DD-<feature>.md` as a
   working-tree file the user reviews and commits themselves. This skill does not run `git add`

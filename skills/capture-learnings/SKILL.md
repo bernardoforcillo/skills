@@ -1,24 +1,25 @@
 ---
 name: capture-learnings
-description: Use at the end of executing a plan or PRD (or when the user asks to capture lessons / update memory) to distil reusable knowledge into the .cursor/memory wiki. Bootstraps the wiki automatically on first use in a project. Never auto-commits.
+description: Use at the end of executing a plan or PRD (or when the user asks to capture lessons / update memory) to distil reusable knowledge into the project memory wiki (`.claude/memory/` or `.cursor/memory/`). Bootstraps the wiki automatically on first use in a project. Never auto-commits.
 ---
 
 # Capture Learnings
 
-`capture-learnings` maintains `.cursor/memory/` — a project's committed, git-versioned,
-cross-linked markdown wiki of compounding knowledge — per the routing rubric and page format
-defined in `.cursor/rules/memory-wiki.mdc`. That rules file is itself created by this skill's
-own bootstrap step if it is missing, so the skill is fully self-installing: the first time it
-runs in a project it sets up everything it needs, then proceeds straight to the requested
-work. Two modes hang off this one entry point — `ingest`, which distils a just-completed
-plan or PRD into the wiki, and `lint`, which health-checks the wiki that already exists.
+`capture-learnings` maintains a project's committed, git-versioned, cross-linked markdown
+wiki of compounding knowledge at `.claude/memory/` (Claude Code) or `.cursor/memory/`
+(Cursor) — per the routing rubric and page format defined in the companion rule
+(`.claude/rules/memory-wiki.md` or `.cursor/rules/memory-wiki.mdc`). That rules file is
+itself created by this skill's own bootstrap step if it is missing, so the skill is fully
+self-installing: the first time it runs in a project it sets up everything it needs, then
+proceeds straight to the requested work. Two modes hang off this one entry point —
+`ingest`, which distils a just-completed plan or PRD into the wiki, and `lint`, which
+health-checks the wiki that already exists.
 
-If a project already has a wiki at `.claude/memory/` (from the earlier Claude Code packaging
-of this plugin) and does not yet have `.cursor/memory/`, keep using that existing wiki.
-Do not bootstrap a second copy and do not migrate automatically.
+If a project already has a wiki at either path, keep using that existing wiki. Do not
+bootstrap a second copy and do not migrate automatically.
 
 **Why a wiki rather than more documentation.** The mechanism is in
-`skills/operating-model/references/foundations/knowledge-and-decay.md`: a
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/knowledge-and-decay.md`: a
 document has no filter of its own, so its error rate rises with the rate of change of whatever it
 describes while confidence in it stays flat — which is why this skill captures the *durable* half
 (decisions, reasons, what transfers) rather than descriptions a machine could regenerate, why every
@@ -39,19 +40,20 @@ Resolve the wiki root first:
    foreign directory at that path may not be this skill's format, and overwriting or merging
    into it blind risks destroying content that isn't ours to manage. Tell the user what's
    missing and let them decide how to proceed.
-4. Else create `.cursor/memory/` with no confirmation prompt:
-   - Copy `skills/capture-learnings/templates/index.md` to
-     `.cursor/memory/index.md`.
-   - Copy `skills/capture-learnings/templates/log.md` to
-     `.cursor/memory/log.md`.
-   - Copy `skills/capture-learnings/templates/check.mjs` to
-     `.cursor/memory/check.mjs`.
-   - Copy `skills/capture-learnings/templates/memory-wiki-rule.md` to
-     `.cursor/rules/memory-wiki.mdc`.
-   - Then proceed straight to the requested mode below — no separate confirmation step.
+4. Else this is a fresh project. Create **one** wiki, not two:
+   - **Claude Code** (`${CLAUDE_PLUGIN_ROOT}` is set in the environment): copy the three
+     templates into `.claude/memory/` (`index.md`, `log.md`, `check.mjs`) and copy
+     `memory-wiki-rule.md` to `.claude/rules/memory-wiki.md`.
+   - **Cursor** (otherwise): copy the three templates into `.cursor/memory/` and copy
+     `memory-wiki-rule.md` to `.cursor/rules/memory-wiki.mdc`.
+   Also copy the rule into the *other* harness's rules path so either can open the project
+   later. Do not create a second wiki directory.
+   Templates live at `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/templates/`
+   (`index.md`, `log.md`, `check.mjs`, `memory-wiki-rule.md`). Then proceed straight to the
+   requested mode below — no separate confirmation step.
 
-In the rest of this skill, "the wiki" and paths such as `.cursor/memory/check.mjs` mean the
-resolved root from the steps above.
+In the rest of this skill, "the wiki" and paths such as `.claude/memory/check.mjs` or
+`.cursor/memory/check.mjs` mean the resolved root from the steps above.
 
 ## Modes
 
@@ -68,14 +70,15 @@ resolved root from the steps above.
    finished around the same time, or none look clearly done), ask the user to confirm before
    proceeding rather than guessing.
 2. **Dispatch the librarian.** In the main session, dispatch the `librarian` subagent via
-   the `Task` tool with `subagent_type: "librarian"`, passing the source path as its prompt.
+   the `Agent` tool (Claude Code) or the `Task` tool (Cursor) with
+   `subagent_type: "librarian"`, passing the source path as its prompt.
    Relay the librarian's summary back to the user verbatim — don't paraphrase or compress it.
-   Only run the ingest steps below inline, in the main session, if the `Task` tool is
+   Only run the ingest steps below inline, in the main session, if the dispatch tool is
    unavailable.
 3. **What the librarian does** (whether run as a subagent or inline): read the source
    document and reflect on the session that produced it; extract candidate lessons, applying
    a YAGNI filter that drops anything already recorded elsewhere (in the wiki, in
-   `.cursor/rules/`, or in an existing skill) rather than re-saving it; route each surviving
+   `.claude/rules/`, `.cursor/rules/`, or in an existing skill) rather than re-saving it; route each surviving
    candidate using the rubric in the companion memory-wiki rule file; integrate each one into
    an existing page rather than creating a duplicate whenever an existing page already covers
    that topic; update `index.md` to reflect any new or changed pages and append an entry to

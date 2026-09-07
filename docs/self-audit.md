@@ -9,12 +9,12 @@ unmeasured claim is a preference. Applying that to somebody else's codebase and 
 be the exact failure it exists to catch — so this document is the pass, with the numbers it was
 actually run on and the findings it actually produced, including the unflattering ones.
 
-Rules applied: `skills/operating-model/references/radical-simplicity.md`,
-`skills/operating-model/references/foundations/defects-and-detection.md`,
-`skills/operating-model/references/foundations/knowledge-and-decay.md`,
-`skills/operating-model/references/foundations/load-and-automation.md`, and
+Rules applied: `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/radical-simplicity.md`,
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/defects-and-detection.md`,
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/knowledge-and-decay.md`,
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/load-and-automation.md`, and
 the change-level standard in
-`skills/software-architecture/references/code-review.md`.
+`${CLAUDE_PLUGIN_ROOT}/skills/software-architecture/references/code-review.md`.
 
 ## 1. What this is, in numbers
 
@@ -63,7 +63,7 @@ The plugin's "production" is a session that has it installed. Running the gate f
 | Dependency failure is defined behaviour | **met** | Was a gap. Each external plugin reference now has a stated fallback that routes to this plugin's own agents (`skills/prd/SKILL.md` carries the table, `agents/product-strategist.md` its own, `docs/architecture.md` the summary), and both say to check availability before promising a hand-off |
 | Limits and quotas | **n/a** | No runtime, no fan-out, no bill |
 | Capacity at expected peak | **met, trivially** | The constrained resource is the reader's context window, quantified in §1 |
-| Rehearsed rollback | **met** | `git revert`, and disable the plugin in Cursor Settings → Plugins; both exercised |
+| Rehearsed rollback | **met** | `git revert`, `/plugin` disable, or disable in Cursor Settings → Plugins; exercised |
 | One-page runbook | **met** | `contributing.md` plus this file |
 | Off switch | **met** | Uninstall or disable the plugin |
 | Cost ceiling known | **met, newly** | See §1 |

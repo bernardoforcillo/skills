@@ -5,15 +5,15 @@ alwaysApply: false
 
 # Memory wiki
 
-The project's compounding knowledge base lives at `.cursor/memory/` (or a pre-existing
-`.claude/memory/` wiki) — a committed, git-versioned, cross-linked markdown wiki. The
-`capture-learnings` skill maintains it; you rarely hand-edit it.
+The project's compounding knowledge base lives at `.claude/memory/` or `.cursor/memory/`
+— a committed, git-versioned, cross-linked markdown wiki. The `capture-learnings` skill
+maintains it; you rarely hand-edit it.
 
 ## Two stores, one maintainer
 
 | Store | Location | Committed | Holds |
 | --- | --- | --- | --- |
-| **Project wiki** | `.cursor/memory/` (or `.claude/memory/` if that's where it already lives) | Yes | `type: project`, `reference` |
+| **Project wiki** | `.claude/memory/` or `.cursor/memory/` | Yes | `type: project`, `reference` |
 | **Personal memory** | the harness's own memory store | No | `type: user`, `feedback` |
 
 Project/reference knowledge goes in the repo wiki. Personal notes (who the user is, how they
@@ -58,13 +58,14 @@ a to-write marker. For project pages, prefer stating the why.>
 | --- | --- |
 | Ongoing project context / constraints / external pointers | the project wiki (`project`/`reference`) |
 | Preference, working style, feedback on how to work | harness memory (`user`/`feedback`) — not committed |
-| Durable convention/gotcha for everyone | **propose** moving to `.cursor/rules/*.mdc` |
-| Reusable multi-step workflow | **propose** a `.cursor/skills/<name>/` skill |
+| Durable convention/gotcha for everyone | **propose** moving to `.claude/rules/*.md` or `.cursor/rules/*.mdc` |
+| Reusable multi-step workflow | **propose** a `.claude/skills/<name>/` or `.cursor/skills/<name>/` skill |
 | Only-this-feature detail | note beside the plan/PRD, or skip |
 
 ## Reminder hook (opt-in)
 
-The plugin ships a `stop` hook (`hooks/capture-learnings-nudge.sh`) that
+The plugin ships a Stop hook (Claude Code) / stop hook (Cursor)
+(`${CLAUDE_PLUGIN_ROOT}/hooks/capture-learnings-nudge.sh`) that
 nudges you to run `/capture-learnings` after plan/PRD work. It only fires in a project that
 already has a memory wiki (this file's presence is itself the opt-in signal) and only when
 a plan/PRD file changed in the last 30 minutes. It never writes the wiki itself.

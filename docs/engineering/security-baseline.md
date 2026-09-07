@@ -70,7 +70,7 @@ wrote ends up in production.
 
 - Deploys are reproducible and attributable: who deployed what, when, from which commit.
 - Backups exist, are encrypted, and a restore has been performed at least once
-  (`operating-model`'s `skills/operating-model/references/reliability-and-incidents.md`).
+  (`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md`).
 - An incident has a named first responder and a written path — including the decision of who tells
   users, and when.
 - Third-party access (contractors, tools, integrations) is inventoried and reviewed; offboarding

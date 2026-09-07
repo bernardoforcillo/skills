@@ -46,7 +46,7 @@ the only moment at which nobody feels any urgency.
 
 ## Time turns behaviour into contract
 
-Hyrum's law (`skills/operating-model/references/foundations/complexity-and-coupling.md`):
+Hyrum's law (`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/complexity-and-coupling.md`):
 with enough consumers, every observable behaviour of your system becomes something someone depends
 on, regardless of what you documented. Ordering of results nobody promised, the exact text of an
 error, a timing side effect, a field that happens to be present — all of it hardens into interface
@@ -58,7 +58,7 @@ Three consequences that are design decisions, not warnings:
   promise (iteration order), avoid leaking internal identifiers, keep error strings out of the
   contract by giving callers codes instead.
 - **The set of dependents only grows**, so the door closes with time
-  (`skills/operating-model/references/foundations/irreversibility-and-optionality.md`).
+  (`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/irreversibility-and-optionality.md`).
   A choice that's cheap to change today because two callers exist is a one-way door at two hundred.
   Spend deliberation early on the things that will accumulate dependents: identifiers, formats,
   public error semantics, anything another team or another product will copy.
@@ -83,7 +83,7 @@ will ever upgrade for you.
 
 Merge cost grows with the *product* of how long a branch lives and how fast the trunk moves, and
 the work of resolving that cost is pure holding cost: it produces nothing
-(`skills/operating-model/references/foundations/flow-and-queues.md`). Hence
+(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/flow-and-queues.md`). Hence
 the trunk-based default:
 
 - **Short-lived branches**, measured in a day or two rather than a sprint.
@@ -118,7 +118,7 @@ irreversibility does to any wide change.
 
 Style guides, layering conventions, dependency policies: each is a filter, and a filter whose
 detection depends on human attention has p < 1 and degrades with fatigue, turnover, and diff size
-(`skills/operating-model/references/foundations/defects-and-detection.md`).
+(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/defects-and-detection.md`).
 A formatter, a linter rule, an import restriction, a CI check — same rule, p ≈ 1, zero marginal
 cost per run, and no opinion attached to it when it fires.
 
@@ -135,7 +135,7 @@ Where a rule genuinely can't be automated (naming that requires judgement, layer
 without an import checker), write it down with an example and a counter-example, and accept that
 it is guidance with a lower detection rate. Then watch for the case where the violation actually
 happened, which is the evidence that earns building the mechanical check
-(`skills/operating-model/references/radical-simplicity.md`).
+(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/radical-simplicity.md`).
 
 ## Deprecation is a process, not an announcement
 
@@ -176,8 +176,8 @@ test is the artefact you point at during the argument, not the documentation.
 - Every convention either has a CI check or is labelled guidance in the project's own rules file —
   and the reviewer stops enforcing what the pipeline should own (`code-review.md`).
 - Deprecations get a lint rule that blocks new callers, an owner, and a date, recorded where the
-  project keeps decisions (`skills/commit/SKILL.md`,
-  `skills/capture-learnings/SKILL.md`).
+  project keeps decisions (`${CLAUDE_PLUGIN_ROOT}/skills/commit/SKILL.md`,
+  `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/SKILL.md`).
 
 ## Checklist
 

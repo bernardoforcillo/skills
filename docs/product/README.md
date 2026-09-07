@@ -18,15 +18,15 @@ someone actually has. A PRD nobody argues with was written too late.
 
 ## How these connect to the plugin's desks
 
-- **The dialogue that produces a PRD** is `skills/prd/SKILL.md`, with
+- **The dialogue that produces a PRD** is `${CLAUDE_PLUGIN_ROOT}/skills/prd/SKILL.md`, with
   `product-strategist` as its research engine; these templates are the artifacts it fills.
-- **Ranking and kill criteria** come from `skills/operating-model/SKILL.md`
+- **Ranking and kill criteria** come from `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/SKILL.md`
   — expected value, cost to learn, and the permanent backlog.
 - **Evidence standards** for anything measured come from that desk's
-  `skills/operating-model/references/evidence-and-experimentation.md`; the experiment brief is that standard as a form.
-- **Price and packaging** rest on `skills/operating-model/references/pricing-and-value-capture.md`, and the unit cost side
-  comes from `skills/modeling/references/profit-modeling.md`.
-- **Growth and go-to-market execution** are `skills/growth/SKILL.md` and
-  `skills/gtm/SKILL.md`.
+  `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`; the experiment brief is that standard as a form.
+- **Price and packaging** rest on `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/pricing-and-value-capture.md`, and the unit cost side
+  comes from `${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/profit-modeling.md`.
+- **Growth and go-to-market execution** are `${CLAUDE_PLUGIN_ROOT}/skills/growth/SKILL.md` and
+  `${CLAUDE_PLUGIN_ROOT}/skills/gtm/SKILL.md`.
 - **In-product experience questions** route to
-  `skills/neuro-design/SKILL.md`.
+  `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/SKILL.md`.

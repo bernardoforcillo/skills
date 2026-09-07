@@ -43,8 +43,8 @@ for (const skill of skills) {
   }
   if (!/^description:\s*\S/m.test(fm[1])) p(`${file}: missing 'description'`);
   const skillName = fm[1].match(/^name:\s*(\S+)\s*$/m);
-  // Cursor infers the skill from the directory, but tooling that reads the
-  // frontmatter directly (the eval harness, for one) gets an empty name without it.
+  // Claude Code infers the name from the directory; Cursor does too. Tooling that
+  // reads the frontmatter directly (the eval harness, for one) gets an empty name without it.
   if (!skillName) p(`${file}: missing 'name'`);
   else if (skillName[1] !== skill) p(`${file}: name '${skillName[1]}' != directory '${skill}'`);
 }
@@ -59,6 +59,7 @@ for (const agent of agents) {
   if (!name) p(`${file}: missing 'name'`);
   else if (name[1] !== agent) p(`${file}: name '${name[1]}' != filename '${agent}'`);
   if (!/^description:\s*\S/m.test(fm[1])) p(`${file}: missing 'description'`);
+  if (!/^tools:\s*\S/m.test(fm[1])) p(`${file}: missing 'tools'`);
 }
 
 // --- (2) every referenced file exists --------------------------------------
@@ -356,27 +357,57 @@ try {
   p(`scripts/mechanisms.mjs: self-test could not run (${err.message})`);
 }
 
-// --- (12) plugin.json and marketplace.json stay in sync --------------------
-const pluginPath = join(root, '.cursor-plugin/plugin.json');
-const marketPath = join(root, '.cursor-plugin/marketplace.json');
-if (!existsSync(pluginPath)) {
-  p('.cursor-plugin/plugin.json: missing (Cursor plugins require this manifest)');
-} else {
-  const plugin = JSON.parse(readFileSync(pluginPath, 'utf8'));
-  if (!plugin.name) p('plugin.json: missing name');
-  else if (!/^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$/.test(plugin.name))
-    p(`plugin.json: name '${plugin.name}' is not kebab-case`);
-  if (!plugin.description) p('plugin.json: missing description');
-  if (!existsSync(marketPath)) {
-    p('.cursor-plugin/marketplace.json: missing');
-  } else {
-    const market = JSON.parse(readFileSync(marketPath, 'utf8'));
-    const entry = (market.plugins || []).find((x) => x.name === plugin.name);
-    if (!entry) p(`marketplace.json: no entry for plugin '${plugin.name}'`);
-    else if (entry.description !== plugin.description)
-      p('marketplace.json: description out of sync with plugin.json');
+// --- (12) both harness manifests stay in sync ------------------------------
+const claudePluginPath = join(root, '.claude-plugin/plugin.json');
+const claudeMarketPath = join(root, '.claude-plugin/marketplace.json');
+const cursorPluginPath = join(root, '.cursor-plugin/plugin.json');
+const cursorMarketPath = join(root, '.cursor-plugin/marketplace.json');
+
+const loadPlugin = (path, label) => {
+  if (!existsSync(path)) {
+    p(`${label}: missing`);
+    return null;
   }
+  const plugin = JSON.parse(readFileSync(path, 'utf8'));
+  if (!plugin.name) p(`${label}: missing name`);
+  else if (!/^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$/.test(plugin.name))
+    p(`${label}: name '${plugin.name}' is not kebab-case`);
+  if (!plugin.description) p(`${label}: missing description`);
+  return plugin;
+};
+const checkMarket = (marketPath, plugin, label) => {
+  if (!plugin) return;
+  if (!existsSync(marketPath)) {
+    p(`${label}: missing`);
+    return;
+  }
+  const market = JSON.parse(readFileSync(marketPath, 'utf8'));
+  const entry = (market.plugins || []).find((x) => x.name === plugin.name);
+  if (!entry) p(`${label}: no entry for plugin '${plugin.name}'`);
+  else if (entry.description !== plugin.description)
+    p(`${label}: description out of sync with plugin.json`);
+};
+
+const claudePlugin = loadPlugin(claudePluginPath, '.claude-plugin/plugin.json');
+const cursorPlugin = loadPlugin(cursorPluginPath, '.cursor-plugin/plugin.json');
+checkMarket(claudeMarketPath, claudePlugin, '.claude-plugin/marketplace.json');
+checkMarket(cursorMarketPath, cursorPlugin, '.cursor-plugin/marketplace.json');
+if (claudePlugin && cursorPlugin) {
+  if (claudePlugin.name !== cursorPlugin.name)
+    p(`plugin.json: Claude name '${claudePlugin.name}' != Cursor name '${cursorPlugin.name}'`);
+  if (claudePlugin.description !== cursorPlugin.description)
+    p('plugin.json: Claude and Cursor descriptions are out of sync');
+  if (claudePlugin.version !== cursorPlugin.version)
+    p(`plugin.json: Claude version '${claudePlugin.version}' != Cursor version '${cursorPlugin.version}'`);
 }
+if (cursorPlugin?.hooks && typeof cursorPlugin.hooks === 'string') {
+  const hooksRel = cursorPlugin.hooks.replace(/^\.\//, '');
+  if (!existsSync(join(root, hooksRel)))
+    p(`.cursor-plugin/plugin.json: hooks path '${cursorPlugin.hooks}' does not exist`);
+}
+if (!existsSync(join(root, 'hooks/hooks.json'))) p('hooks/hooks.json: missing (Claude Code Stop hook)');
+if (!existsSync(join(root, 'hooks/cursor-hooks.json')))
+  p('hooks/cursor-hooks.json: missing (Cursor stop hook)');
 
 if (problems.length) {
   console.error(`plugin: ${problems.length} problem(s):`);

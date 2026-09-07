@@ -75,7 +75,7 @@ back.
 Use the closed form only as a sanity check on a mature, flat cohort. Where you have a retention
 curve, sum it: `ltvFromSurvival(revenuePerPeriod, survival[])` in
 `../../../../scripts/mechanisms.mjs`. The same assumption sits inside the plateau expression
-above — with a declining hazard, N\* is higher than a/c and takes longer to reach. `skills/operating-model/references/foundations/compounding-and-capital.md`
+above — with a declining hazard, N\* is higher than a/c and takes longer to reach. `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/compounding-and-capital.md`
 is the general form: a rate improvement compounds, a one-time addition doesn't.
 
 The corollary is a ranking rule the acquisition-first instinct gets backwards: below a certain
@@ -111,7 +111,7 @@ Consequences worth stating plainly, because they are where growth plans go wrong
 LTV > CAC is not sufficient; you have to be able to *carry* the gap. A cohort that repays in three
 years is only spendable against if three years of it can be financed, and a business that spends
 past its ability to carry the gap can be right about the unit economics and still not survive to
-collect them — the ruin case in `skills/operating-model/references/foundations/compounding-and-capital.md`.
+collect them — the ruin case in `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/compounding-and-capital.md`.
 
 At small scale the operative number is therefore months-to-payback, not the LTV:CAC ratio, and it
 should be compared against the cash you actually hold rather than against an industry rule of
@@ -123,7 +123,7 @@ A campaign converts money into a stock of users, once. A loop converts product w
 that applies to the stock you already have — its output next month is proportional to this month's
 result. That is the difference between buying an asset and buying an outcome, and it is why the
 compounding preference in
-`skills/operating-model/references/impact-and-prioritization.md` ranks a
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/impact-and-prioritization.md` ranks a
 product change that raises k above a campaign with the same immediate effect.
 
 It is also why loop work is judged on a different horizon: k improvements pay geometrically and
@@ -133,7 +133,7 @@ therefore look unimpressive in the period they land.
 
 - **Aggregate churn is a mix statistic.** A blended rate improving while every cohort worsens is a
   standard occurrence when acquisition is growing; read cohorts, always
-  (`skills/operating-model/references/evidence-and-experimentation.md`).
+  (`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`).
 - **k measured on early adopters over-predicts.** The first users are the most enthusiastic
   population you will ever have, and they share for reasons the median user won't.
 - **Attribution buys a story, not a mechanism.** A channel credited by a last-touch model is not

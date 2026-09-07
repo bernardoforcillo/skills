@@ -2,7 +2,7 @@
 
 The release pipeline sets the optimal batch size for everything else: when releasing is cheap,
 small batches are correct, and small batches are what make feedback informative and rollbacks
-boring (`operating-model`'s `skills/operating-model/references/foundations/flow-and-queues.md`). Investment here pays
+boring (`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/flow-and-queues.md`). Investment here pays
 into every other practice.
 
 ## Environments — as few as defend themselves
@@ -39,7 +39,7 @@ container build → deploy to the first environment. Mechanical checks belong he
 
 - **Progressive by default at maturity**: canary channel, then stable — for a Flux-managed repo,
   that's the two-channel layout in `software-architecture`'s
-  `skills/software-architecture/references/kubernetes-deployment-conventions.md`.
+  `${CLAUDE_PLUGIN_ROOT}/skills/software-architecture/references/kubernetes-deployment-conventions.md`.
 - **An automatic rollback signal** beats a heroic human one: error rate or latency past a threshold
   on the canary reverts it.
 - **Rollback is rehearsed, not assumed.** If it has never been executed, it is a plan, not a path.
@@ -78,7 +78,7 @@ that matters (payment, personal data, another service's critical path).
 
 Anything unticked is either work to do before it takes traffic, or an explicitly accepted risk with
 a date to revisit — the same standard the operating model applies everywhere
-(`skills/operating-model/references/reliability-and-incidents.md`).
+(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md`).
 
 ## Release hygiene
 

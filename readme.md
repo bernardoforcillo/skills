@@ -1,6 +1,7 @@
 # copilot
 
-Bernardo's personal Cursor plugin — a set of skills, agents, a stop hook, and a project
+Bernardo's personal Claude Code **and** Cursor plugin — a set of skills, agents, a Stop/stop
+hook, and a project
 reference base covering design review, project knowledge management, commit discipline,
 product/growth work, software architecture, system modeling through to unit economics, and the
 operating model that decides what's worth building at all. Single-maintainer, source-available (see [license.md](license.md)).
@@ -21,14 +22,14 @@ Design decisions and reviews grounded in cited neuroscience/cognitive-science re
 - Agent `neuro-design-reviewer` — delegate an isolated, structured second-opinion critique.
 
 ### Memory wiki
-Gives any project a committed, git-versioned knowledge base (`.cursor/memory/`) distinct
-from personal harness memory — bootstrapped automatically on first use. A pre-existing
-`.claude/memory/` wiki from the earlier Claude Code packaging is reused rather than duplicated.
+Gives any project a committed, git-versioned knowledge base (`.claude/memory/` or
+`.cursor/memory/`) distinct from personal harness memory — bootstrapped automatically on
+first use. Whichever path already exists is the wiki; a second copy is never created.
 
 - Skill `capture-learnings` — ingest a finished plan/PRD into the wiki, or lint it for health.
 - Agent `librarian` — runs the ingest in isolation so it doesn't consume the main session's context.
-- A self-gated `stop` hook nudges you to run `/capture-learnings` after plan/PRD work, but only
-  in a project that already has a wiki.
+- A self-gated Stop (Claude Code) / stop (Cursor) hook nudges you to run `/capture-learnings`
+  after plan/PRD work, but only in a project that already has a wiki.
 
 ### Commit
 - Skill `commit` — Conventional Commits discipline (atomic, typed, imperative, explains *why*),
@@ -154,7 +155,30 @@ and which practices don't transfer below a certain scale.
 
 ## Installation
 
-This is a Cursor plugin. The manifest lives at `.cursor-plugin/plugin.json`.
+This plugin ships both a Claude Code manifest (`.claude-plugin/`) and a Cursor manifest
+(`.cursor-plugin/`). Plugin-internal paths are written `${CLAUDE_PLUGIN_ROOT}/...`: Claude Code
+substitutes that variable; Cursor resolves it as the installed plugin directory (the folder
+that contains `skills/` and `agents/`).
+
+### Claude Code
+
+**Test locally first** (from this repo's root, where `.claude-plugin/marketplace.json` lives):
+
+```
+/plugin marketplace add ./
+/plugin install copilot@copilot
+```
+
+**From GitHub**:
+
+```
+/plugin marketplace add bernardoforcillo/copilot
+/plugin install copilot@copilot
+```
+
+Verify with `/plugin` (Installed / Errors tabs) or `/plugin list`.
+
+### Cursor
 
 **Local install** (from a clone of this repo):
 
@@ -173,14 +197,17 @@ marketplace), or — if the plugin is listed on the public marketplace:
 /add-plugin copilot
 ```
 
-The public marketplace requires OSI-approved open source; this plugin's license is
-PolyForm Strict, so local or team import is the intended path.
+The public Cursor marketplace requires OSI-approved open source; this plugin's license is
+PolyForm Strict, so local or team import is the intended Cursor path.
 
 ## Usage
 
-Skills are slash commands named for the skill: `/commit`, `/prd <feature>`,
-`/software-architecture`. Agents are dispatched as `@software-architect` or via the
-`Task` tool with `subagent_type: "<agent-name>"` (e.g. `software-architect`).
+**Claude Code:** skills are `/copilot:<skill-name>` — e.g. `/copilot:commit`,
+`/copilot:prd <feature>`, `/copilot:software-architecture`. Agents are `@copilot:<agent-name>`
+or the `Agent` tool with `subagent_type: "<agent-name>"`.
+
+**Cursor:** skills are `/commit`, `/prd <feature>`, `/software-architecture`. Agents are
+`@software-architect` or the `Task` tool with `subagent_type: "<agent-name>"`.
 
 ### Modeling
 The UML pillars that earn their place — use case, domain/class, sequence, state machine, component,

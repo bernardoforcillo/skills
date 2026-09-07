@@ -58,13 +58,13 @@ metric so the next reader can check the reasoning rather than the number alone:
 For a user-facing surface, the five categories worth choosing between — happiness, engagement,
 adoption, retention, task success — and the rule that you pick one or two rather than filling in
 all five, are in
-`skills/operating-model/references/evidence-and-experimentation.md`.
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`.
 
 ## Guardrails
 
 The metrics that must not get worse while the others improve: latency, error rate, support volume,
 refund rate, unsubscribes, churn by tenure. Every experiment inherits these
-(`operating-model`'s `skills/operating-model/references/evidence-and-experimentation.md`).
+(`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`).
 
 ## Segments
 

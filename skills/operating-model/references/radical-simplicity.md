@@ -44,7 +44,7 @@ it this way" — is not proof. It is the thing the rule exists to stop.
 
 Common complications and the evidence each one requires before it lands. This table is the fast
 path; when the complication is architectural,
-`skills/software-architecture/references/scaling-and-infra.md` carries the
+`${CLAUDE_PLUGIN_ROOT}/skills/software-architecture/references/scaling-and-infra.md` carries the
 full trigger→action framework behind these rows.
 
 | Complication | Evidence required before it's earned |

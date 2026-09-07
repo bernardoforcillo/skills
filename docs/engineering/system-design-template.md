@@ -25,10 +25,10 @@ understands the domain beats three who skim.
 
 **How it dies.** This document is not permanent. Once the thing ships, the decisions that turned
 out to be one-way doors move to ADRs (`adr-template.md`), what generalizes goes to the memory wiki
-(`skills/capture-learnings/SKILL.md`), and the document is marked superseded.
+(`${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/SKILL.md`), and the document is marked superseded.
 A design doc kept as living documentation becomes wrong faster than anyone notices, because
 nothing checks it — see
-`skills/operating-model/references/foundations/knowledge-and-decay.md` for
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/knowledge-and-decay.md` for
 why an unchecked document decays and what to do instead.
 
 ## 1. The question
@@ -75,7 +75,7 @@ comes out of the design before this document is accepted.
 - **Fixed and stepped cost**, and where the next step lands.
 - **Contribution per unit** and break-even volume, if the unit is priced.
 
-Method: the `modeling` skill's `skills/modeling/references/profit-modeling.md`. Rates must be looked up and dated,
+Method: the `modeling` skill's `${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/profit-modeling.md`. Rates must be looked up and dated,
 never recalled.
 
 ## 7. Alternatives considered

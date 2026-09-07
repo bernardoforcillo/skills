@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "stop": [
+      {
+        "command": "./hooks/capture-learnings-nudge.sh",
+        "timeout": 10
+      }
+    ]
+  }
+}

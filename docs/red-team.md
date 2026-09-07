@@ -4,7 +4,7 @@
 > Re-run: when a claim is added that carries a number, or when one of the verdicts below is disputed
 
 The foundations tier says a claim is exactly as strong as the condition that would make it false
-(`skills/operating-model/references/foundations/how-to-argue.md`). Until this
+(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/how-to-argue.md`). Until this
 pass, nothing had tried to make any of them false. That is the difference between a tier that
 *could* be falsified and one that has been put through the attempt, and it is the gap this document
 closes.

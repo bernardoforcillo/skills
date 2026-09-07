@@ -33,7 +33,7 @@ same idea being re-litigated every month.
 The share of capacity that is *not* ranked: maintenance, dependency updates, deletion,
 documentation, incident follow-ups. These lose every individual EV comparison and win the
 aggregate one, so they get reserved rather than ranked
-(`skills/operating-model/references/limits-and-failure-modes.md`).
+(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/limits-and-failure-modes.md`).
 
 Suggested: name a percentage and hold it.
 

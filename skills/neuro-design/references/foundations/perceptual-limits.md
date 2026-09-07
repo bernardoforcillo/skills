@@ -81,7 +81,7 @@ has been wrong often enough, it is rationally ignored — and the adaptation gen
 channel, not just the specific signal.
 
 This is exactly the argument that makes a flaky test negative-value in
-`skills/operating-model/references/foundations/defects-and-detection.md`, and
+`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/defects-and-detection.md`, and
 it transfers without modification: **an attention-getting element that is often not worth attending
 to consumes the attention available for the one that is.** A red dot on everything is a red dot on
 nothing. The practical rule that follows is a budget: how many things per screen are allowed to
