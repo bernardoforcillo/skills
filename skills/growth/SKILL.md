@@ -30,13 +30,10 @@ enterprise cycles, gated distribution.
    discover from the repo on its own: target market, timing, channels already tried, links the
    user pasted. State explicitly whether the user wants strategy only, or strategy plus build —
    this determines whether `growth-marketer` needs to chain `gtm-engineer` itself.
-2. **Pick isolation.** Use the `Agent` tool with `subagent_type: "growth-marketer"`.
-   - `isolation: "worktree"` when the dispatch will write files — strategy briefs land as files
-     under `docs/gtm/`, so most dispatches need this.
-   - Plain dispatch (no worktree) only for a purely verbal research question that produces no
-     files at all.
-3. **Relay the report in full**, including the worktree path, so the user knows exactly where to
-   look and what to review.
+2. **Dispatch.** Use the `Task` tool with `subagent_type: "growth-marketer"` and
+   `run_in_background: false`. Strategy briefs land as files under `docs/gtm/`.
+3. **Relay the report in full**, including the path of any files written, so the user knows
+   exactly where to look and what to review.
 
 ## Rules
 
@@ -51,8 +48,8 @@ enterprise cycles, gated distribution.
   mechanics inside the product itself, dispatch `neuro-design-reviewer` or use the
   `neuro-design`/`neuro-design-audit` skills instead of this one.
 - **Evidence standard comes from the operating model.** Whatever this skill's strategy work
-  proposes is held to `operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`: a primary
+  proposes is held to `operating-model`'s `skills/operating-model/references/evidence-and-experimentation.md`: a primary
   metric with a target set in advance, guardrails, the cohort-lifetime-value frame for any spend,
   and an experiment only where one can actually settle the question.
-- **Multiple independent growth tracks get parallel dispatches**, one worktree each, rather than
+- **Multiple independent growth tracks get parallel dispatches**, one `Task` each, rather than
   one dispatch trying to cover unrelated tracks at once.

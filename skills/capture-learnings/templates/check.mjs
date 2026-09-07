@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Completeness checker for the .claude/memory wiki.
+// Completeness checker for the project memory wiki (.cursor/memory or .claude/memory).
 // Exit 0 = consistent; exit 1 = problems (printed).
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';

@@ -86,7 +86,7 @@ full method and a worked example.
 
 From those: **contribution per unit = price − variable cost per unit**, and an engineering change
 is worth *Δcontribution × volume − cost to build*, ranked against the alternatives per
-`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/impact-and-prioritization.md`.
+`operating-model`'s `skills/operating-model/references/impact-and-prioritization.md`.
 
 ## The traceability loop
 

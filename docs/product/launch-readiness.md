@@ -49,7 +49,7 @@ silent skip isn't.
 - [ ] A date in the calendar to read the metric and decide: keep, iterate, or revert
 - [ ] A date to remove the feature flag
 - [ ] What was learned goes to the memory wiki
-      (`${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/SKILL.md`)
+      (`skills/capture-learnings/SKILL.md`)
 
 **Reverting is a normal outcome.** Most changes move nothing; a change that didn't earn its
 complexity should come back out, and a launch process that treats reverting as failure guarantees

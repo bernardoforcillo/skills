@@ -1,20 +1,24 @@
 ---
 name: capture-learnings
-description: Use at the end of executing a plan or PRD (or when the user asks to capture lessons / update memory) to distil reusable knowledge into the .claude/memory wiki. Bootstraps the wiki automatically on first use in a project. Never auto-commits.
+description: Use at the end of executing a plan or PRD (or when the user asks to capture lessons / update memory) to distil reusable knowledge into the .cursor/memory wiki. Bootstraps the wiki automatically on first use in a project. Never auto-commits.
 ---
 
 # Capture Learnings
 
-`capture-learnings` maintains `.claude/memory/` — a project's committed, git-versioned,
+`capture-learnings` maintains `.cursor/memory/` — a project's committed, git-versioned,
 cross-linked markdown wiki of compounding knowledge — per the routing rubric and page format
-defined in `.claude/rules/memory-wiki.md`. That rules file is itself created by this skill's
+defined in `.cursor/rules/memory-wiki.mdc`. That rules file is itself created by this skill's
 own bootstrap step if it is missing, so the skill is fully self-installing: the first time it
 runs in a project it sets up everything it needs, then proceeds straight to the requested
 work. Two modes hang off this one entry point — `ingest`, which distils a just-completed
 plan or PRD into the wiki, and `lint`, which health-checks the wiki that already exists.
 
+If a project already has a wiki at `.claude/memory/` (from the earlier Claude Code packaging
+of this plugin) and does not yet have `.cursor/memory/`, keep using that existing wiki.
+Do not bootstrap a second copy and do not migrate automatically.
+
 **Why a wiki rather than more documentation.** The mechanism is in
-`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/knowledge-and-decay.md`: a
+`skills/operating-model/references/foundations/knowledge-and-decay.md`: a
 document has no filter of its own, so its error rate rises with the rate of change of whatever it
 describes while confidence in it stays flat — which is why this skill captures the *durable* half
 (decisions, reasons, what transfers) rather than descriptions a machine could regenerate, why every
@@ -23,25 +27,31 @@ outcome rather than a failure. Read it before arguing with the routing rubric.
 
 ## Bootstrap (runs before either mode, every invocation)
 
-Before doing anything else, check whether `.claude/memory/` exists in the current project:
+Resolve the wiki root first:
 
-- **If `.claude/memory/` does not exist**, create it with no confirmation prompt:
-  - Copy `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/templates/index.md` to
-    `.claude/memory/index.md`.
-  - Copy `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/templates/log.md` to
-    `.claude/memory/log.md`.
-  - Copy `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/templates/check.mjs` to
-    `.claude/memory/check.mjs`.
-  - Copy `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/templates/memory-wiki-rule.md` to
-    `.claude/rules/memory-wiki.md`.
-  - Then proceed straight to the requested mode below — no separate confirmation step.
-- **If `.claude/memory/` exists but is missing `index.md`, `log.md`, or `check.mjs`**, stop
-  and report the mismatch instead of touching anything. A partial or foreign directory at
-  that path may not be this skill's format, and overwriting or merging into it blind risks
-  destroying content that isn't ours to manage. Tell the user what's missing and let them
-  decide how to proceed.
-- **If `.claude/memory/` exists and has all three files**, skip bootstrap entirely and go
-  straight to the requested mode.
+1. If `.cursor/memory/` exists and contains `index.md`, `log.md`, and `check.mjs`, that is the
+   wiki. Skip bootstrap and go to the requested mode.
+2. Else if `.claude/memory/` exists and contains those three files, that is the wiki. Skip
+   bootstrap and go to the requested mode. Companion rules, if present, live at
+   `.claude/rules/memory-wiki.md` rather than `.cursor/rules/memory-wiki.mdc`.
+3. Else if `.cursor/memory/` or `.claude/memory/` exists but is missing `index.md`, `log.md`,
+   or `check.mjs`, stop and report the mismatch instead of touching anything. A partial or
+   foreign directory at that path may not be this skill's format, and overwriting or merging
+   into it blind risks destroying content that isn't ours to manage. Tell the user what's
+   missing and let them decide how to proceed.
+4. Else create `.cursor/memory/` with no confirmation prompt:
+   - Copy `skills/capture-learnings/templates/index.md` to
+     `.cursor/memory/index.md`.
+   - Copy `skills/capture-learnings/templates/log.md` to
+     `.cursor/memory/log.md`.
+   - Copy `skills/capture-learnings/templates/check.mjs` to
+     `.cursor/memory/check.mjs`.
+   - Copy `skills/capture-learnings/templates/memory-wiki-rule.md` to
+     `.cursor/rules/memory-wiki.mdc`.
+   - Then proceed straight to the requested mode below — no separate confirmation step.
+
+In the rest of this skill, "the wiki" and paths such as `.cursor/memory/check.mjs` mean the
+resolved root from the steps above.
 
 ## Modes
 
@@ -58,25 +68,25 @@ Before doing anything else, check whether `.claude/memory/` exists in the curren
    finished around the same time, or none look clearly done), ask the user to confirm before
    proceeding rather than guessing.
 2. **Dispatch the librarian.** In the main session, dispatch the `librarian` subagent via
-   the `Agent` tool with `subagent_type: "librarian"`, passing the source path as its prompt.
+   the `Task` tool with `subagent_type: "librarian"`, passing the source path as its prompt.
    Relay the librarian's summary back to the user verbatim — don't paraphrase or compress it.
-   Only run the ingest steps below inline, in the main session, if the `Agent` tool is
+   Only run the ingest steps below inline, in the main session, if the `Task` tool is
    unavailable.
 3. **What the librarian does** (whether run as a subagent or inline): read the source
    document and reflect on the session that produced it; extract candidate lessons, applying
    a YAGNI filter that drops anything already recorded elsewhere (in the wiki, in
-   `.claude/rules/`, or in an existing skill) rather than re-saving it; route each surviving
-   candidate using the rubric in `.claude/rules/memory-wiki.md`; integrate each one into an
-   existing page rather than creating a duplicate whenever an existing page already covers
+   `.cursor/rules/`, or in an existing skill) rather than re-saving it; route each surviving
+   candidate using the rubric in the companion memory-wiki rule file; integrate each one into
+   an existing page rather than creating a duplicate whenever an existing page already covers
    that topic; update `index.md` to reflect any new or changed pages and append an entry to
-   `log.md`; run `node .claude/memory/check.mjs` as the gate that the wiki is still
+   `log.md`; run `node <wiki-root>/check.mjs` as the gate that the wiki is still
    internally consistent before finishing; and report a per-file "what I saved and where"
    summary. None of this is committed — ingest only ever leaves working-tree changes for the
    user to review and commit themselves.
 
 ## Lint procedure
 
-Read every page in `.claude/memory/` plus `index.md`, and report:
+Read every page in the wiki plus `index.md`, and report:
 
 - **Contradictions** — pages that assert conflicting facts about the same topic.
 - **Stale claims** — verify that files, flags, or commands a page references still exist in
@@ -89,7 +99,7 @@ Read every page in `.claude/memory/` plus `index.md`, and report:
 - **Index drift** — mismatches between what `index.md` lists and what actually exists on
   disk.
 
-Always end the lint pass with `node .claude/memory/check.mjs` and append a
+Always end the lint pass with `node <wiki-root>/check.mjs` and append a
 `## [<date>] lint | <scope>` entry to `log.md` describing what was checked. Report every
 finding, but fix nothing without the user's explicit approval first — lint is diagnostic by
 default, not self-healing.
@@ -98,7 +108,7 @@ default, not self-healing.
 
 If the user wants lint findings fixed rather than just reported, this loops instead of
 stopping at one pass — see the shared loop-until-converged pattern in
-`../../docs/architecture.md`. Convergence here means `node .claude/memory/check.mjs` exits 0
+`../../docs/architecture.md`. Convergence here means `node <wiki-root>/check.mjs` exits 0
 **and** the lint pass finds no remaining unresolved contradiction, stale claim, orphan, or
 dangling link; the cap is 3 rounds. Each round: apply the user-approved fixes for the current
 round's findings, then re-run the full lint pass including `check.mjs`. At the cap, report the
@@ -112,8 +122,8 @@ remaining issues and append them to `log.md` as a known residual
 - Never edit the wiki without showing the summary of proposed changes first — the user sees
   what would change before it's written.
 - Personal notes about the user (preferences, feedback on how to work, working style) never
-  enter `.claude/memory/`. Those belong in the harness's own memory store, not the project
-  wiki — `.claude/memory/` is for project and reference knowledge only.
+  enter the wiki. Those belong in the harness's own memory store, not the project
+  wiki — the wiki is for project and reference knowledge only.
 - No emoji anywhere in wiki content.
 - Keep pages terse: one fact or topic per page, integrated into an existing page when one
   already fits rather than spawning near-duplicates.

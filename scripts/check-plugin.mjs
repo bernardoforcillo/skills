@@ -43,7 +43,7 @@ for (const skill of skills) {
   }
   if (!/^description:\s*\S/m.test(fm[1])) p(`${file}: missing 'description'`);
   const skillName = fm[1].match(/^name:\s*(\S+)\s*$/m);
-  // Claude Code infers the name from the directory, but tooling that reads the
+  // Cursor infers the skill from the directory, but tooling that reads the
   // frontmatter directly (the eval harness, for one) gets an empty name without it.
   if (!skillName) p(`${file}: missing 'name'`);
   else if (skillName[1] !== skill) p(`${file}: name '${skillName[1]}' != directory '${skill}'`);
@@ -59,15 +59,14 @@ for (const agent of agents) {
   if (!name) p(`${file}: missing 'name'`);
   else if (name[1] !== agent) p(`${file}: name '${name[1]}' != filename '${agent}'`);
   if (!/^description:\s*\S/m.test(fm[1])) p(`${file}: missing 'description'`);
-  if (!/^tools:\s*\S/m.test(fm[1])) p(`${file}: missing 'tools'`);
 }
 
 // --- (2) every referenced file exists --------------------------------------
 // Only paths that point inside this plugin are checked. A reference to a target
-// project's own files (CLAUDE.md, tsconfig.json, .claude/memory/...) is not ours,
-// and is told apart from a broken internal path by whether a file of that name
-// exists anywhere in the plugin at all.
-const INTERNAL = /^(\$\{CLAUDE_PLUGIN_ROOT\}\/|\.\.\/|references\/|foundations\/|templates\/|skills\/|agents\/|docs\/|hooks\/|scripts\/)/;
+// project's own files (AGENTS.md, CLAUDE.md, tsconfig.json, .cursor/memory/...) is
+// not ours, and is told apart from a broken internal path by whether a file of
+// that name exists anywhere in the plugin at all.
+const INTERNAL = /^(\$\{(?:CLAUDE_PLUGIN_ROOT|CURSOR_PLUGIN_ROOT|PLUGIN_ROOT)\}\/|\.\.\/|references\/|foundations\/|templates\/|skills\/|agents\/|docs\/|hooks\/|scripts\/)/;
 const docFiles = [...walk('skills'), ...walk('agents'), ...walk('docs')];
 const IGNORED_ROOTS = readFileSync(join(root, '.gitignore'), 'utf8')
   .split('\n')
@@ -87,9 +86,16 @@ for (const skill of skills) {
   }
 }
 
+const PLUGIN_ROOT_PREFIXES = [
+  '${CLAUDE_PLUGIN_ROOT}/',
+  '${CURSOR_PLUGIN_ROOT}/',
+  '${PLUGIN_ROOT}/',
+];
 const candidates = (fromFile, ref) => {
   const fromDir = dirname(fromFile);
-  if (ref.startsWith('${CLAUDE_PLUGIN_ROOT}/')) return [ref.replace('${CLAUDE_PLUGIN_ROOT}/', '')];
+  for (const prefix of PLUGIN_ROOT_PREFIXES) {
+    if (ref.startsWith(prefix)) return [ref.slice(prefix.length)];
+  }
   const out = [relative(root, resolve(root, fromDir, ref)), ref];
   // A skill-relative path (references/x.md) may be written from a file deeper in
   // the skill, so also try it against the skill root.
@@ -106,7 +112,8 @@ for (const file of docFiles) {
     // by context; only things written as paths are checked as paths.
     if (!ref.includes('/')) continue;
     if (/[<>*]/.test(ref)) continue; // a path template, not a file
-    if (ref.startsWith('.claude/')) continue; // a target project's own wiki
+    if (ref.startsWith('.claude/')) continue; // a target project's own wiki (Claude-era path)
+    if (ref.startsWith('.cursor/') && !ref.startsWith('.cursor-plugin/')) continue;
     if (IGNORED_ROOTS.some((ig) => ref.startsWith(ig))) continue;
     if (candidates(file, ref).some((t) => existsSync(join(root, t)))) continue;
     const base = ref.split('/').pop();
@@ -350,12 +357,26 @@ try {
 }
 
 // --- (12) plugin.json and marketplace.json stay in sync --------------------
-const plugin = JSON.parse(readFileSync(join(root, '.claude-plugin/plugin.json'), 'utf8'));
-const market = JSON.parse(readFileSync(join(root, '.claude-plugin/marketplace.json'), 'utf8'));
-const entry = (market.plugins || []).find((x) => x.name === plugin.name);
-if (!entry) p(`marketplace.json: no entry for plugin '${plugin.name}'`);
-else if (entry.description !== plugin.description)
-  p('marketplace.json: description out of sync with plugin.json');
+const pluginPath = join(root, '.cursor-plugin/plugin.json');
+const marketPath = join(root, '.cursor-plugin/marketplace.json');
+if (!existsSync(pluginPath)) {
+  p('.cursor-plugin/plugin.json: missing (Cursor plugins require this manifest)');
+} else {
+  const plugin = JSON.parse(readFileSync(pluginPath, 'utf8'));
+  if (!plugin.name) p('plugin.json: missing name');
+  else if (!/^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$/.test(plugin.name))
+    p(`plugin.json: name '${plugin.name}' is not kebab-case`);
+  if (!plugin.description) p('plugin.json: missing description');
+  if (!existsSync(marketPath)) {
+    p('.cursor-plugin/marketplace.json: missing');
+  } else {
+    const market = JSON.parse(readFileSync(marketPath, 'utf8'));
+    const entry = (market.plugins || []).find((x) => x.name === plugin.name);
+    if (!entry) p(`marketplace.json: no entry for plugin '${plugin.name}'`);
+    else if (entry.description !== plugin.description)
+      p('marketplace.json: description out of sync with plugin.json');
+  }
+}
 
 if (problems.length) {
   console.error(`plugin: ${problems.length} problem(s):`);

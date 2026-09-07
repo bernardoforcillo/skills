@@ -19,7 +19,7 @@ Agree the triggers in advance, so writing one is never a judgment about how bad 
 - Anyone asks for one — the request itself is evidence that the cause isn't understood.
 
 Below those triggers, a note and a regression test are the whole obligation
-(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md`).
+(`skills/operating-model/references/reliability-and-incidents.md`).
 
 ## Summary
 
@@ -85,7 +85,7 @@ restored. These are the controls to keep funding.
 
 The only part of this document with teeth. Every line has an owner and a date, or it is not an
 action item. Rank them by expected value like any other work
-(`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/impact-and-prioritization.md`) — and if
+(`skills/operating-model/references/impact-and-prioritization.md`) — and if
 one loses that ranking, delete it and say so rather than leaving a permanent open item that
 implies coverage you don't have.
 
@@ -107,7 +107,7 @@ an action; "the deploy refuses to run a migration and a code change in the same 
 - [ ] Reviewed by someone who wasn't the responder
 - [ ] Action items filed where the work actually gets ranked, not only in this document
 - [ ] What generalizes captured in the memory wiki
-      (`${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/SKILL.md`)
+      (`skills/capture-learnings/SKILL.md`)
 - [ ] A date to check that the actions closed — an open item nobody revisits is a false sense of
       coverage
 

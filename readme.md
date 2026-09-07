@@ -1,6 +1,6 @@
 # copilot
 
-Bernardo's personal Claude Code plugin — a set of skills, agents, a Stop hook, and a project
+Bernardo's personal Cursor plugin — a set of skills, agents, a stop hook, and a project
 reference base covering design review, project knowledge management, commit discipline,
 product/growth work, software architecture, system modeling through to unit economics, and the
 operating model that decides what's worth building at all. Single-maintainer, source-available (see [license.md](license.md)).
@@ -21,12 +21,13 @@ Design decisions and reviews grounded in cited neuroscience/cognitive-science re
 - Agent `neuro-design-reviewer` — delegate an isolated, structured second-opinion critique.
 
 ### Memory wiki
-Gives any project a committed, git-versioned knowledge base (`.claude/memory/`) distinct
-from personal harness memory — bootstrapped automatically on first use.
+Gives any project a committed, git-versioned knowledge base (`.cursor/memory/`) distinct
+from personal harness memory — bootstrapped automatically on first use. A pre-existing
+`.claude/memory/` wiki from the earlier Claude Code packaging is reused rather than duplicated.
 
 - Skill `capture-learnings` — ingest a finished plan/PRD into the wiki, or lint it for health.
 - Agent `librarian` — runs the ingest in isolation so it doesn't consume the main session's context.
-- A self-gated `Stop` hook nudges you to run `/capture-learnings` after plan/PRD work, but only
+- A self-gated `stop` hook nudges you to run `/capture-learnings` after plan/PRD work, but only
   in a project that already has a wiki.
 
 ### Commit
@@ -153,28 +154,33 @@ and which practices don't transfer below a certain scale.
 
 ## Installation
 
-**Test locally first** (from this repo's root, where `.claude-plugin/marketplace.json` lives):
+This is a Cursor plugin. The manifest lives at `.cursor-plugin/plugin.json`.
+
+**Local install** (from a clone of this repo):
 
 ```
-/plugin marketplace add ./
-/plugin install copilot@copilot
+mkdir -p ~/.cursor/plugins/local
+ln -s "$(pwd)" ~/.cursor/plugins/local/copilot
 ```
 
-**From GitHub**, once this repo is pushed (no remote is configured yet — swap in the real path):
+Reload the Cursor window. On Teams/Enterprise, **Allow Local Plugin Imports** must be on.
+A marketplace plugin with the same `name` wins over the local copy.
+
+**From GitHub**, import `bernardoforcillo/copilot` from Cursor's Plugins dashboard (team
+marketplace), or — if the plugin is listed on the public marketplace:
 
 ```
-/plugin marketplace add bernardoforcillo/copilot
-/plugin install copilot@copilot
+/add-plugin copilot
 ```
 
-Verify with `/plugin` (Installed / Errors tabs) or `/plugin list`.
+The public marketplace requires OSI-approved open source; this plugin's license is
+PolyForm Strict, so local or team import is the intended path.
 
 ## Usage
 
-Skills are invoked scoped to the plugin: `/copilot:<skill-name>` — e.g. `/copilot:commit`,
-`/copilot:prd <feature>`, `/copilot:software-architecture`. Agents are dispatched the same
-way, `@copilot:<agent-name>` (e.g. `@copilot:software-architect`) or via the `Agent` tool with
-`subagent_type: "<agent-name>"`.
+Skills are slash commands named for the skill: `/commit`, `/prd <feature>`,
+`/software-architecture`. Agents are dispatched as `@software-architect` or via the
+`Task` tool with `subagent_type: "<agent-name>"` (e.g. `software-architect`).
 
 ### Modeling
 The UML pillars that earn their place — use case, domain/class, sequence, state machine, component,
@@ -258,8 +264,8 @@ flips as a parameter moves.
 that never loads, and advice that loads reliably and is wrong.
 
 - `<skill>-trigger.json` — 20 queries per skill, half of them near-misses that belong to another
-  desk, run through `claude -p` by `skill-creator`'s `run_eval.py` to measure whether the
-  description actually discriminates.
+  desk. The recorded run used `claude -p` via `skill-creator`'s `run_eval.py`; the query set
+  itself is harness-agnostic.
 - `<skill>-tasks.json` — task prompts with objectively checkable assertions, written against the
   specific failures each desk exists to prevent (endorsing a split with no measured trigger,
   optimising before deleting in a takeover, protecting a reliability target nobody is spending,

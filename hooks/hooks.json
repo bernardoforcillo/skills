@@ -1,15 +1,9 @@
 {
   "hooks": {
-    "Stop": [
+    "stop": [
       {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/capture-learnings-nudge.sh",
-            "timeout": 10
-          }
-        ]
+        "command": "./hooks/capture-learnings-nudge.sh",
+        "timeout": 10
       }
     ]
   }

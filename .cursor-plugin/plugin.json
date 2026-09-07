@@ -1,0 +1,29 @@
+{
+  "name": "copilot",
+  "displayName": "copilot",
+  "version": "0.2.0",
+  "description": "Bern's copilot twin — neuro-design review, a memory wiki, commit discipline, a product/GTM desk, a software-architecture desk for Go + Vite/React + Kubernetes projects, an operating-model desk for what's worth building and what complexity it's allowed to buy, and a modeling desk that carries a design from UML views through to contribution per unit",
+  "author": {
+    "name": "Bernardo Forcillo"
+  },
+  "homepage": "https://github.com/bernardoforcillo/copilot",
+  "repository": "https://github.com/bernardoforcillo/copilot",
+  "license": "PolyForm-Strict-1.0.0",
+  "keywords": [
+    "neuro-design",
+    "architecture",
+    "operating-model",
+    "product",
+    "modeling",
+    "growth",
+    "gtm"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "architecture",
+    "review",
+    "product",
+    "design",
+    "operating-model"
+  ]
+}

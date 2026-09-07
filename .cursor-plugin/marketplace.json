@@ -3,7 +3,9 @@
   "owner": {
     "name": "Bernardo Forcillo"
   },
-  "description": "Bernardo's personal Claude Code plugins",
+  "metadata": {
+    "description": "Bernardo's personal Cursor plugins"
+  },
   "plugins": [
     {
       "name": "copilot",

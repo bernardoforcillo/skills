@@ -37,7 +37,7 @@ Checklist before you keep a class diagram:
 **Mapping to Go:** an aggregate is usually a package with the root type exported and inner types
 unexported or constructed only through the root. **Mapping to a Vite/React tree:** the domain model
 is not the component tree — it's what the store and the API client speak; the component tree is a
-different (development) view. `software-architecture`'s `${CLAUDE_PLUGIN_ROOT}/skills/software-architecture/references/code-organization.md` carries
+different (development) view. `software-architecture`'s `skills/software-architecture/references/code-organization.md` carries
 the layering rules both map into.
 
 ## Object view
@@ -83,10 +83,10 @@ Include, or it isn't answering the question:
   active user, per token.
 - **The trust boundaries** — which hops cross the internet, which cross a VPC, which are in-process.
 - **The stateful nodes** — where the data actually lives, and what its backup and restore path is
-  (`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md` makes that non-negotiable).
+  (`operating-model`'s `skills/operating-model/references/reliability-and-incidents.md` makes that non-negotiable).
 
 For a Kubernetes/Flux deploy, the node structure mirrors the `<namespace>/<app>/<channel>/` layout
-in `software-architecture`'s `${CLAUDE_PLUGIN_ROOT}/skills/software-architecture/references/kubernetes-deployment-conventions.md`; the deployment
+in `software-architecture`'s `skills/software-architecture/references/kubernetes-deployment-conventions.md`; the deployment
 diagram is that layout with cost and traffic annotations added.
 
 ## Composite structure view

@@ -40,7 +40,7 @@ reliability work can be ranked against features instead of argued about after an
 
 Why the target belongs below 100%, why a chain of dependencies caps it before you do anything, and
 why redundancy pays less than the rollback path at small scale:
-`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/reliability-and-redundancy.md`.
+`skills/operating-model/references/foundations/reliability-and-redundancy.md`.
 
 ## Alerting
 
@@ -51,7 +51,7 @@ why redundancy pays less than the rollback path at small scale:
 - **Alert on budget burn rate**, not on every violation — fast burn pages, slow burn opens a
   ticket. See the windows below.
 - **Ticket-worthy is not page-worthy.** Decide, per alert, which one it is; the wake list is short
-  and explicit (`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md`).
+  and explicit (`operating-model`'s `skills/operating-model/references/reliability-and-incidents.md`).
 
 ### Burn-rate windows
 

@@ -29,14 +29,14 @@ Load the matching reference file on demand (progressive disclosure) and check th
 
 | Lens | Reference file |
 | :--- | :--- |
-| Attention & visual hierarchy | `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/attention-and-hierarchy.md` |
-| Cognitive load & memory | `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/cognitive-load-and-memory.md` |
-| Perception, Gestalt & color | `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/perception-gestalt-color.md` |
-| Motor control & interaction | `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/motor-and-interaction.md` |
-| Emotion, aesthetics & memory | `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/emotion-and-memory.md` |
-| Reading & typography | `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/typography-and-reading.md` |
+| Attention & visual hierarchy | `skills/neuro-design/references/attention-and-hierarchy.md` |
+| Cognitive load & memory | `skills/neuro-design/references/cognitive-load-and-memory.md` |
+| Perception, Gestalt & color | `skills/neuro-design/references/perception-gestalt-color.md` |
+| Motor control & interaction | `skills/neuro-design/references/motor-and-interaction.md` |
+| Emotion, aesthetics & memory | `skills/neuro-design/references/emotion-and-memory.md` |
+| Reading & typography | `skills/neuro-design/references/typography-and-reading.md` |
 
-For domain-specific artifacts, also consult the matching cross-domain file in `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/cross-domain/` — e.g. `graphical-perception-dataviz.md` for charts/dashboards, `neurodiversity-inclusive.md` for accessibility, `human-factors-safety.md` for alarms/error-prone flows, `behavioral-economics.md` and `social-influence-persuasion.md` to check for dark patterns.
+For domain-specific artifacts, also consult the matching cross-domain file in `skills/neuro-design/references/cross-domain/` — e.g. `graphical-perception-dataviz.md` for charts/dashboards, `neurodiversity-inclusive.md` for accessibility, `human-factors-safety.md` for alarms/error-prone flows, `behavioral-economics.md` and `social-influence-persuasion.md` to check for dark patterns.
 
 ## Workflow
 

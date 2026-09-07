@@ -22,15 +22,15 @@ what changes a decision.
 
 ## How these connect to the plugin's desks
 
-- **Shape** comes from `${CLAUDE_PLUGIN_ROOT}/skills/software-architecture/SKILL.md` — layers,
+- **Shape** comes from `skills/software-architecture/SKILL.md` — layers,
   dependency direction, scaling triggers, and the stack conventions.
-- **Views and diagrams** come from `${CLAUDE_PLUGIN_ROOT}/skills/modeling/SKILL.md` — including
+- **Views and diagrams** come from `skills/modeling/SKILL.md` — including
   the profit chain, which is why the system design template asks for unit cost.
 - **Whether the complexity was earned** is judged by
-  `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/SKILL.md`; the maturity column it defines is what
+  `skills/operating-model/SKILL.md`; the maturity column it defines is what
   sets the level of rigor these documents ask for.
 - **What survives the project** goes to
-  `${CLAUDE_PLUGIN_ROOT}/skills/capture-learnings/SKILL.md` — the memory wiki is where a
+  `skills/capture-learnings/SKILL.md` — the memory wiki is where a
   document's conclusions outlive the document.
 
 The product-side counterparts are in [`../product/README.md`](../product/README.md).

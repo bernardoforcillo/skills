@@ -24,7 +24,7 @@ as orders of magnitude to argue from, not as targets to hit.
 
 **Why these rules hold**, rather than who practises them, is derived in the operating-model desk's
 foundations tier:
-`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/defects-and-detection.md` —
+`skills/operating-model/references/foundations/defects-and-detection.md` —
 defect cost monotone in survival time, filters composing as ∏(1−pᵢ) only where they fail
 independently, fixed reviewer attention per change (so size is the control variable), and the
 information asymmetry between an author who holds the intent and a reviewer who holds the artifact,
@@ -85,7 +85,7 @@ practical rules:
   isn't.
 
 This is the batch-size argument from `operating-model`'s
-`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/decision-latency.md`, applied to the one
+`skills/operating-model/references/decision-latency.md`, applied to the one
 queue that every change passes through.
 
 ## Latency is the term that dominates
@@ -114,7 +114,7 @@ What's left is what a human is actually for:
   introduce a second pattern where one already exists (`code-organization.md`).
 - **Complications that haven't been earned** — the new abstraction with one call site, the cache
   with no measured trigger, the queue for a load nobody has seen
-  (`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/radical-simplicity.md` and
+  (`skills/operating-model/references/radical-simplicity.md` and
   `scaling-and-infra.md`).
 - **The failure paths** — timeouts, partial writes, retries, idempotency. The happy path is what
   the author already exercised.
@@ -122,7 +122,7 @@ What's left is what a human is actually for:
 - **Data and security decisions** — what gets logged, what crosses a boundary, what a new field
   makes possible.
 - **The description** — whether the *why* is written down somewhere it will survive
-  (`${CLAUDE_PLUGIN_ROOT}/skills/commit/SKILL.md`).
+  (`skills/commit/SKILL.md`).
 
 ## Writing the comments
 
@@ -167,7 +167,7 @@ the codebase — including the ones you were trying to get rid of. What to look 
 
 And the rule that makes the rest of it work: **the human who approves it owns it.** An LGTM on an
 agent's diff makes the change yours in every sense this plugin's
-`${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/ownership-and-execution.md` means — you
+`skills/operating-model/references/ownership-and-execution.md` means — you
 carry it when it breaks, and "the agent wrote it" is not a cause in a postmortem.
 
 ## When review isn't the instrument

@@ -3,6 +3,9 @@
 Two kinds of measurement, because a skill can fail in two independent ways: it can be good advice
 that never loads, or it can load reliably and give bad advice.
 
+The trigger harness below is `skill-creator`'s Claude Code runner (`claude -p`). The query sets
+and the task assertions are harness-agnostic and still apply when these skills run in Cursor.
+
 | File | Measures | How it runs |
 | --- | --- | --- |
 | `<skill>-trigger.json` | **Triggering** — does the skill's description cause it to load on the queries it should, and stay out of the way on the near-misses? | `skill-creator`'s `scripts/run_eval.py`, which runs each query through `claude -p` and checks whether the skill was consulted |
@@ -78,7 +81,7 @@ Triggering held near-perfect specificity and low recall across two quite differe
 texts. That's consistent with how skills load: Claude consults one when the task isn't something it
 can already handle, and most of these prompts are advice-shaped questions it answers directly. The
 practical consequence is worth stating plainly — **these desks earn their keep when invoked
-(`/copilot:operating-model`, `/copilot:modeling`) or dispatched as agents, more than as ambient
+(`/operating-model`, `/modeling`) or dispatched as agents, more than as ambient
 skills that fire on their own.** A description rewrite is unlikely to change that, which is why
 the reverted attempt is recorded here rather than repeated.
 
@@ -100,7 +103,7 @@ property the tier exists to buy, and it is the one most likely to erode silently
 
 `software-architecture-tasks.json` is a task set with no trigger counterpart. That's deliberate:
 the structural finding above says these desks earn their keep when invoked or dispatched, and the
-code-review standard is reached through `/copilot:software-architecture` or the
+code-review standard is reached through `/software-architecture` or the
 `software-architect` agent rather than by ambient triggering. Measuring its output quality is
 still worth doing; measuring a triggering rate for it is not.
 

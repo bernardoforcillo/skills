@@ -42,7 +42,7 @@ transferred, a seat-month, an API call, a booking. Two tests:
 - **Its count tracks value received.** Seats track value in a collaboration tool and not in a
   batch-processing one; API calls track value for an integration product and not for a UI-first
   one. This is the value-metric question from `operating-model`'s
-  `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/pricing-and-value-capture.md`, and the domain model is where the candidates come
+  `skills/operating-model/references/pricing-and-value-capture.md`, and the domain model is where the candidates come
   from.
 
 If the unit and the price are on different bases — priced per seat, cost driven by documents
@@ -66,7 +66,7 @@ matter:
 Two disciplines make the number trustworthy: **rate from the provider's current price list, never
 from memory** (they change, and inference pricing changes fastest), and **volume from your own
 instrumentation, or labelled as an assumption**. Rates are risk; volumes are usually Knightian
-uncertainty (`operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/foundations/uncertainty-and-information.md`) — mark
+uncertainty (`operating-model`'s `skills/operating-model/references/foundations/uncertainty-and-information.md`) — mark
 which is which, because only one of them is a fact.
 
 Annotate the diagram itself with a `«cost»` stereotype on the expensive messages. A sequence
@@ -106,7 +106,7 @@ engineering effort is spent where it can't matter.
 ## Step 5 — price the change
 
 For a proposed engineering change: **EV ≈ Δcontribution × expected volume − cost to build**, ranked
-against the alternatives per `operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/impact-and-prioritization.md`. State
+against the alternatives per `operating-model`'s `skills/operating-model/references/impact-and-prioritization.md`. State
 the assumption behind the volume, and set the kill criterion — the measured Δ below which the work
 stops — before starting.
 
@@ -144,7 +144,7 @@ a support ticket at 6 minutes.
    than a guess, and a heavy-user tier whose price you can derive instead of invent.
 4. **The distribution matters more than the average.** If 3% of users generate 40% of summaries,
    the average is a fiction and the limit is the entire design. Read it by segment, as
-   `operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md` requires.
+   `operating-model`'s `skills/operating-model/references/evidence-and-experimentation.md` requires.
 5. **The design lever ranks itself:** cutting input tokens (truncation, retrieval instead of
    whole-document context) attacks 30%; caching repeat summaries attacks both inference terms;
    fixing the ticket cause attacks 50%. Do the third one first.

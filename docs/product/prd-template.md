@@ -21,7 +21,7 @@ nothing changed, this is a backlog item that hasn't won yet, and that's a fine a
 
 The actors (including the operational ones: support, admin, the scheduled job) and the two or three
 scenarios this must handle. Use case view, if a picture helps
-(`${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/behavioral-views.md`).
+(`skills/modeling/references/behavioral-views.md`).
 
 ## 4. Success
 
@@ -53,7 +53,7 @@ transitions nobody wants to think about: expired, refunded, abandoned, failed pa
 ## 8. Unit economics
 
 The unit this feature produces, its variable cost, and whether it changes contribution
-(`${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/profit-modeling.md`). A feature that costs money
+(`skills/modeling/references/profit-modeling.md`). A feature that costs money
 per use and isn't priced needs that stated as a decision, not discovered in an invoice.
 
 ## 9. Risks and open questions
