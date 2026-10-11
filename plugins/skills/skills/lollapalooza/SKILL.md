@@ -51,7 +51,7 @@ which lenses actually apply:
 
 | Munger discipline | Lens | Dispatch |
 | --- | --- | --- |
-| Psychology (25 tendencies) | Cognitive bias / persuasion | `neuro-design-reviewer` |
+| Psychology (25 tendencies) | Cognitive bias / persuasion | `design:neuro-design-reviewer` |
 | Microeconomics | Incentives / competitive dynamics | `growth-marketer` |
 | Engineering/Physics | Margin of safety / redundancy / scale | `software-architect` — or `reliability-engineer` when the decision is about a system already running (failure modes, budgets, operational load) |
 | Evidentiary reasoning | Avoiding self-deception / JTBD evidence | `product-strategist` |
@@ -59,7 +59,9 @@ which lenses actually apply:
 | Capital allocation | Opportunity cost, earned complexity, kill criteria | `operating-partner` |
 | Biology/evolution | Competitive advantage, niches | `references/gap-disciplines.md` |
 
-Name which of the six lens agents — `neuro-design-reviewer`, `growth-marketer`,
+`design:neuro-design-reviewer` lives in the `design` plugin. If that plugin is not installed, the psychology lens cannot be dispatched: say so, and apply the cognitive-bias discipline inline labelled as unsourced rather than skipping it silently.
+
+Name which of the six lens agents — `design:neuro-design-reviewer`, `growth-marketer`,
 `software-architect`, `reliability-engineer`, `product-strategist`, `operating-partner` — actually
 apply to the decision in front of you (not all six by default; the engineering row supplies one of
 its two, not both), and which entries in `references/gap-disciplines.md`
@@ -71,7 +73,7 @@ dispatched agent the decision/problem statement plus a one-line reminder of whic
 asked to apply, so it reasons from its own discipline rather than free-associating.
 
 Watch for two double-counting traps. That same Ideate step already peer-dispatches
-`growth-marketer` and `neuro-design-reviewer` internally, so when `product-strategist` is among
+`growth-marketer` and `design:neuro-design-reviewer` internally, so when `product-strategist` is among
 the dispatched lenses, don't also dispatch those two standalone in the same run — or if both do
 run alongside it, flag in Step 3 that they aren't fully independent of `product-strategist`'s own
 analysis. `operating-partner` has the same relationship with `software-architect` and
@@ -103,7 +105,7 @@ table itself — at most six agent lenses plus the two gap-discipline entries �
 separately-stated round number). Each round: dispatch the next applicable lens from the table
 that hasn't run yet, then re-run the synthesis. The double-counting guard above persists across
 every round, not just the round `product-strategist` ran in: once `product-strategist` has been
-dispatched in any prior round, don't dispatch `growth-marketer`/`neuro-design-reviewer`
+dispatched in any prior round, don't dispatch `growth-marketer`/`design:neuro-design-reviewer`
 standalone in a later round either — or if you do, flag the non-independence in Step 3, per the
 guard above. At the cap — every applicable lens exhausted and still in tension — report the
 tension as a genuine, real trade-off; never quietly pick a side without naming what it's

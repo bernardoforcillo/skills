@@ -27,6 +27,8 @@ A senior/staff design team is mostly a discipline of **evidence and decision**: 
 | Words, errors, empty states, i18n | `content-design` | `content-designer` |
 | How will we know it worked | `design-metrics` | `design-metrics-analyst` |
 | What level is this work, in scope terms | `design-ladder` | `design-lead` |
+| Why a design works on a person — attention, load, perception, motor, emotion, reading (build) | `neuro-design` | `neuro-design-reviewer` |
+| Same evidence, applied to an existing UI | `neuro-design-audit` | `neuro-design-reviewer` |
 
 ## The shared references
 
@@ -43,6 +45,8 @@ A senior/staff design team is mostly a discipline of **evidence and decision**: 
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/content-design.md` | Errors, voice, forms, i18n |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/metrics-and-impact.md` | HEART process, SUS, experiments, prioritisation |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/visual-ui.md` | Type, colour, layout, targets, motion, interaction |
+
+The `neuro-design` skill carries its own six lens references, a bibliography, cross-domain files and the perceptual-limits foundation under `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/`; it is the evidence base for every question about how a design lands on a person.
 
 Templates live in `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/`: brief, research-plan, critique-agenda, review-report, handoff-spec, decision-record, a11y-audit-report, measurement-plan, ds-contribution.
 
@@ -65,7 +69,9 @@ If the goal is missing, ask — or state the assumed goal at the top and carry o
 
 ## Hand-offs to the `skills` plugin (optional peers)
 
-Evidence for *why a design works on a person* — attention, cognitive load, perception, motor, emotion, reading — → `skills:neuro-design` (build) and `skills:neuro-design-audit` (review), or the `skills:neuro-design-reviewer` agent for an isolated pass. Component structure in code → `skills:software-architecture`. Whether the work is worth its cost → `skills:operating-model`.
+Neuro-design lives here. These two do not:
+
+Component structure in code → `skills:software-architecture`; whether the work is worth its cost → `skills:operating-model`.
 
 These live in another plugin and may not be installed. If the `skills` plugin is absent, do the step inline from the reference files here and say what was skipped.
 

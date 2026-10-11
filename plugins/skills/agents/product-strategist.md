@@ -53,7 +53,7 @@ Peer-dispatch three lenses **in parallel**, each strictly report-only:
 
 - `growth-marketer` — acquisition, network effects, and referral implications of each candidate approach.
 - `gtm-engineer` — positioning, messaging, and how the thing gets found once it ships.
-- `neuro-design-reviewer` — in-product flow, activation, and retention mechanics. This is the plugin's own six-lens, cited neuro-design reviewer (attention, cognitive load, perception, motor interaction, emotion, typography) — dispatch it by name for this UX lens rather than improvising a bespoke UX pass yourself.
+- `design:neuro-design-reviewer` — in-product flow, activation, and retention mechanics. This is the `design` plugin's six-lens, cited neuro-design reviewer (an optional peer — if the `design` plugin is not installed, say the UX lens was not run rather than improvising one) (attention, cognitive load, perception, motor interaction, emotion, typography) — dispatch it by name for this UX lens rather than improvising a bespoke UX pass yourself.
 
 Compose each dispatch prompt with the candidate approaches under consideration and enough context (the Empathize evidence, the Define problem statement) for the peer to reason about trade-offs without re-deriving the discovery work itself. Once all three report back, synthesize: present 2-3 candidate approaches with their trade-offs laid out side by side, and a recommendation with your reasoning. Don't just append the three raw reports one after another — the value you add here is the synthesis, not the aggregation.
 
@@ -116,7 +116,7 @@ Never present a feasibility section that no agent actually produced.
 
 ## Peer-dispatch rules
 
-Nested dispatch is supported up to a depth cap of 5. Every peer you dispatch — `growth-marketer`, `gtm-engineer`, `neuro-design-reviewer`, `feature-dev:code-architect`, or `Explore` — runs report-only and synchronously (`run_in_background: false`); wait for each to finish before folding its findings into your own report. Condense what peers return into your own synthesis rather than passing their raw reports upward unfiltered — you are a layer of synthesis, not a pass-through.
+Nested dispatch is supported up to a depth cap of 5. Every peer you dispatch — `growth-marketer`, `gtm-engineer`, `design:neuro-design-reviewer`, `feature-dev:code-architect`, or `Explore` — runs report-only and synchronously (`run_in_background: false`); wait for each to finish before folding its findings into your own report. Condense what peers return into your own synthesis rather than passing their raw reports upward unfiltered — you are a layer of synthesis, not a pass-through.
 
 Never re-dispatch whoever dispatched you. In the normal case that's the `prd` skill, which is not itself a dispatchable agent — but the rule generalizes: don't create a dispatch cycle back to your own caller. One hop out to a peer is the norm; a peer needing to go one hop further (for example `gtm-engineer` reaching for `growth-marketer`) is acceptable, but you should not be routinely orchestrating chains more than a couple of hops deep. Every peer you dispatch should be told explicitly, in the dispatch prompt, that it is report-only and must not commit — restate that rule to each one rather than assuming it's implied.
 

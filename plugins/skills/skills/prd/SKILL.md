@@ -92,7 +92,7 @@ synthesis artifact bridging Define into Ideate/Prototype.
 **4. Ideate** — dispatch `product-strategist`
 The agent peer-dispatches three lenses in parallel, each strictly report-only: `growth-marketer`
 for acquisition, network effects, and referral implications; `gtm-engineer` for positioning,
-messaging, and how the thing gets found once it ships; and `neuro-design-reviewer` for
+messaging, and how the thing gets found once it ships; and `design:neuro-design-reviewer` (from the `design` plugin; if it is not installed, state that the UX lens was not run) for
 in-product flow, activation, and retention mechanics. Present 2-3 candidate approaches back to
 the user with their trade-offs laid out side by side, plus a recommendation — the synthesis, not
 three raw sub-reports stapled together.
@@ -171,7 +171,7 @@ hand-off happens, then filled in with a link.
 ## Rules
 
 - **Router, not shotgun.** Dispatch only the specialists a given phase actually needs. Never
-  fire the whole panel (`gtm-engineer`, `growth-marketer`, `neuro-design-reviewer`,
+  fire the whole panel (`gtm-engineer`, `growth-marketer`, `design:neuro-design-reviewer`,
   `feature-dev:code-architect`) on every pass — Ideate needs the three lenses, Prototype needs
   the architect, and that's the extent of it.
 - **Ground feasibility in what exists.** Prototype's technical read builds on the project's own

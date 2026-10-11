@@ -31,7 +31,7 @@ A request, an artifact, a goal — any of them may be missing. If the goal is mi
    - tokens, components, governance → `design-system-steward`
    - words, states, errors, i18n → `content-designer`
    - how will we know / is the evidence enough → `design-metrics-analyst`
-   If the `skills` plugin is installed: attention/load/perception questions → `skills:neuro-design-reviewer`; is this worth building → `skills:operating-partner`; the shape is architectural → `skills:software-architect`. If it is not installed, answer inline from the reference files and say what you skipped.
+   Attention, load or perception questions → `neuro-design-reviewer` (this plugin). If the optional `skills` plugin is installed: is this worth building → `skills:operating-partner`; the shape is architectural → `skills:software-architect`. If it is not installed, answer those two inline from the reference files and say what you skipped.
 7. **Synthesize on convergence and tension.** Two independent desks agreeing is a stronger signal than one; a genuine conflict (for example accessibility versus a visual direction) is surfaced as a trade-off with a recommendation, not averaged away.
 8. **Record** any hard-to-reverse decision with the decision-record template.
 

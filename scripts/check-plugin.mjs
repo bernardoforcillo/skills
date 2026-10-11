@@ -7,14 +7,14 @@
 // loop-until-converged adopters table) but are maintained by hand.
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const pluginRoots = readdirSync(join(root, 'plugins'))
   .map((d) => join(root, 'plugins', d))
   .filter((d) => statSync(d).isDirectory());
 // skills/, agents/, hooks/ and plugin.json ship in a plugin under plugins/<name>/; docs/, evals/, scripts/ stay at the repo root.
-const PLUGIN_DIRS = ['skills', 'agents', 'hooks', '.claude-plugin/plugin.json'];
+const PLUGIN_DIRS = ['skills', 'agents', 'hooks', 'docs/engineering', 'scripts/mechanisms.mjs', '.claude-plugin/plugin.json'];
 const abs = (...parts) => {
   const rel = join(...parts);
   const norm = rel.replaceAll(sep, '/');
@@ -90,7 +90,7 @@ for (const agent of agents) {
 // and is told apart from a broken internal path by whether a file of that name
 // exists anywhere in the plugin at all.
 const INTERNAL = /^(\$\{CLAUDE_PLUGIN_ROOT\}\/|\.\.\/|references\/|foundations\/|templates\/|skills\/|agents\/|docs\/|hooks\/|scripts\/)/;
-const docFiles = [...walk('skills'), ...walk('agents'), ...walk('docs')];
+const docFiles = [...walk('skills'), ...walk('agents'), ...walk('docs'), ...walk('docs/engineering')];
 const IGNORED_ROOTS = read(abs('.gitignore'))
   .split('\n')
   .map((l) => l.trim().replace(/\/$/, ''))
@@ -130,6 +130,15 @@ for (const file of docFiles) {
     if (/[<>*]/.test(ref)) continue; // a path template, not a file
     if (ref.startsWith('.claude/')) continue; // a target project's own wiki
     if (IGNORED_ROOTS.some((ig) => ref.startsWith(ig))) continue;
+    // ${CLAUDE_PLUGIN_ROOT} is the root of the plugin that owns the file: a path through it
+    // must resolve there, not in a sibling plugin (the lenient search below would hide that).
+    if (ref.startsWith('${CLAUDE_PLUGIN_ROOT}/')) {
+      const owner = pluginRoots.find((r) => existsSync(join(r, file)));
+      if (owner && !existsSync(join(owner, ref.slice('${CLAUDE_PLUGIN_ROOT}/'.length)))) {
+        p(`${file}: path \`${ref}\` does not resolve inside its own plugin — a plugin cannot read a sibling plugin's files`);
+        continue;
+      }
+    }
     if (candidates(file, ref).some((t) => existsSync(abs(t)))) continue;
     const base = ref.split('/').pop();
     const elsewhere = [...new Set(pluginFiles.get(base) || [])];
@@ -356,7 +365,7 @@ for (const skill of skills) {
 // The figures quoted in the foundations and the worked examples are computed, not asserted.
 // mechanisms.mjs holds the models and pins those figures; if either side moves alone, this fails.
 try {
-  const mech = await import('./mechanisms.mjs');
+  const mech = await import(pathToFileURL(abs('scripts/mechanisms.mjs')).href);
   const { checks: mechChecks, failed } = mech.selfTest();
   for (const c of failed) p(`scripts/mechanisms.mjs: ${c.label} — got ${c.actual}, expected ${c.expected}`);
   if (!mechChecks.length) p('scripts/mechanisms.mjs: self-test ran no checks');

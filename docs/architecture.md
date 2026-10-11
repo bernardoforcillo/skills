@@ -124,12 +124,12 @@ graph LR
   design-lead -->|tokens, components, governance| design-system-steward
   design-lead -->|words, states, i18n| content-designer
   design-lead -->|is the evidence enough| design-metrics-analyst
-  design-lead -.attention, load, perception.-> neuro-design-reviewer
+  design-lead -->|attention, load, perception| neuro-design-reviewer
   design-lead -.worth building.-> operating-partner
   design-lead -.architectural shape.-> software-architect
-  design-critic -.isolated evidence pass.-> neuro-design-reviewer
+  design-critic -->|isolated evidence pass| neuro-design-reviewer
   design-reviewer -->|a WCAG question| a11y-auditor
-  design-reviewer -.evidence-heavy perception question.-> neuro-design-reviewer
+  design-reviewer -->|evidence-heavy perception question| neuro-design-reviewer
   design-system-steward -->|a WCAG question| a11y-auditor
   design-system-steward -.component structure in code.-> software-architect
   design-metrics-analyst -.expected-value ranking.-> operating-partner

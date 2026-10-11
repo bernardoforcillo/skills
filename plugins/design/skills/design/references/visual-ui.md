@@ -1,6 +1,6 @@
 # Visual craft: type, colour, layout, targets, motion
 
-Numbers here are quotable because their sources are named. Conventions are labelled as conventions. Evidence about *why* these work on a human (acuity, load, attention) lives in the `skills` plugin's `neuro-design` desk.
+Numbers here are quotable because their sources are named. Conventions are labelled as conventions. Evidence about *why* these work on a human (acuity, load, attention) lives in this plugin's `neuro-design` skill.
 
 ## Typography
 

@@ -8,12 +8,12 @@
     {
       "name": "skills",
       "source": "./plugins/skills",
-      "description": "Bernardo's skills — neuro-design review, a memory wiki, commit discipline, a product/GTM desk, a software-architecture desk for Go + Vite/React + Kubernetes projects, an operating-model desk for what's worth building and what complexity it's allowed to buy, and a modeling desk that carries a design from UML views through to contribution per unit"
+      "description": "Bernardo's skills — a memory wiki, commit discipline, a product/GTM desk, a software-architecture desk for Go + Vite/React + Kubernetes projects, an operating-model desk for what's worth building and what complexity it's allowed to buy, and a modeling desk that carries a design from UML views through to contribution per unit"
     },
     {
       "name": "design",
       "source": "./plugins/design",
-      "description": "A senior/staff design team — seven desks (design lead, critic, reviewer, accessibility auditor, design-system steward, content designer, metrics analyst) and twelve skills covering problem framing, research, critique, review, handoff, decision records, WCAG 2.2, DTCG tokens, content design and metrics. Claims carry evidence labels; optional peers in the skills plugin supply neuro-design."
+      "description": "A senior/staff design team — seven desks (design lead, critic, reviewer, accessibility auditor, design-system steward, content designer, metrics analyst), twelve process skills (framing, research, critique, review, handoff, decision records, WCAG 2.2, DTCG tokens, content design, metrics), and the neuro-design evidence base (six lenses, an audit skill and a reviewer agent). Claims carry evidence labels."
     }
   ]
 }

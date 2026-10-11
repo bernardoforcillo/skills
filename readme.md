@@ -13,9 +13,9 @@ A senior/staff design team as a separate plugin. Every claim carries an evidence
 - Skill `design` — the front door: routes a question to the right desk and loads the shared rules.
 - Skills `problem-framing`, `research-planning`, `design-critique`, `design-review`, `design-handoff`, `decision-record`, `a11y-audit`, `design-tokens`, `design-system-governance`, `content-design`, `design-metrics`, `design-ladder`.
 - Agents `design-lead`, `design-critic`, `design-reviewer`, `a11y-auditor`, `design-system-steward`, `content-designer`, `design-metrics-analyst` — dispatched for an isolated pass.
-- Optional peers in the `skills` plugin: `neuro-design`, `neuro-design-audit`, `neuro-design-reviewer` supply the attention, load and perception evidence. Without them the design desks say what was not checked.
+- Optional peers in the `skills` plugin: `operating-partner`, `software-architect`, `operating-model` and `software-architecture`. Without them the design desks say what was not checked. The product and growth desks in `skills` call `design:neuro-design-reviewer` the same way.
 
-### Neuro-design
+### Neuro-design (also in the `design` plugin)
 Design decisions and reviews grounded in cited neuroscience/cognitive-science research
 (attention, cognitive load, perception & color, motor interaction, emotion, typography).
 
@@ -204,7 +204,7 @@ deployment — plus the step most modeling guides omit: carrying the model throu
   provider's pricing from memory.
 
 ### Project reference base
-`docs/engineering/` and `docs/product/` hold the blueprints a project copies into its own docs:
+`plugins/skills/docs/engineering/` and `docs/product/` hold the blueprints a project copies into its own docs:
 system design and ADR templates, API and data-modeling guides, testing strategy (including the
 size contract that decides what a test may touch), observability and SLOs (golden signals and
 burn-rate alerting), a security baseline (identity, supply chain, build provenance), release and
@@ -224,13 +224,13 @@ its place by going stale four times in a single session — and whether every fi
 `references/foundations/` directory keeps the tier's contract: it opens as a foundation, names the
 principle it generates and the mechanism, and ends with the condition that voids it.
 
-It also runs `scripts/mechanisms.mjs --test`. That file is the arithmetic of the foundations tier as
+It also runs `plugins/skills/scripts/mechanisms.mjs --test`. That file is the arithmetic of the foundations tier as
 runnable functions — serial and redundant availability, error budgets, queue multipliers, batch
 defect probability, filter escape probability, toil saturation and automation payback, growth
 plateau and lifetime value, Fitts and Hick — with a self-test pinning every figure quoted in the
 references and worked examples, so prose and model cannot drift apart. Use it directly on your own
-numbers: `node scripts/mechanisms.mjs serialAvailability 0.9999 0.999 0.9995`, or
-`node scripts/mechanisms.mjs list`. Both scripts have no dependencies; exit 0 means consistent.
+numbers: `node plugins/skills/scripts/mechanisms.mjs serialAvailability 0.9999 0.999 0.9995`, or
+`node plugins/skills/scripts/mechanisms.mjs list`. Both scripts have no dependencies; exit 0 means consistent.
 
 ## Self-audit
 
@@ -259,7 +259,7 @@ and the self-audit's own claim that the checker is independent of its author was
 execution is, its rule selection isn't.
 
 Each verdict changed the source file rather than being defended in the document, and every number is
-reproducible with `node scripts/mechanisms.mjs` — including `sweep`, which shows where a conclusion
+reproducible with `node plugins/skills/scripts/mechanisms.mjs` — including `sweep`, which shows where a conclusion
 flips as a parameter moves.
 
 ## Evals

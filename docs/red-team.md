@@ -15,8 +15,8 @@ None survived unchanged in the form it was originally written — which is eithe
 attack was serious, or that the original claims were loose. Both readings are compatible with what
 follows, and the honest position is that some of both is true.
 
-Every number below is reproducible: `node scripts/mechanisms.mjs <fn> <args>`, and
-`node scripts/mechanisms.mjs sweep <fn> <argIndex> <from> <to> <steps> <args>` for the ranges.
+Every number below is reproducible: `node plugins/skills/scripts/mechanisms.mjs <fn> <args>`, and
+`node plugins/skills/scripts/mechanisms.mjs sweep <fn> <argIndex> <from> <to> <steps> <args>` for the ranges.
 
 ---
 
@@ -177,6 +177,6 @@ and treat a claim that has never been attacked from outside this repo as unteste
 confirmed.
 
 **The standing instruction:** when a claim in this plugin acquires a number, it goes into
-`scripts/mechanisms.mjs` and gets attacked here before it is trusted. When one loses, the source
+`plugins/skills/scripts/mechanisms.mjs` and gets attacked here before it is trusted. When one loses, the source
 file changes and this document records what it used to say — because the record of a retired claim
 is the only thing that stops it from coming back.

@@ -21,4 +21,4 @@ Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/ux-process.md`.
 
 ## Delegate
 
-The `design-lead` agent runs an isolated planning pass. For why-it-works-on-a-person questions, the `skills` plugin's `neuro-design` desk is the evidence base (optional peer).
+The `design-lead` agent runs an isolated planning pass. For why-it-works-on-a-person questions, `neuro-design` is the evidence base.

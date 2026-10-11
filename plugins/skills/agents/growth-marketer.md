@@ -80,10 +80,12 @@ Cite GrowthBook's "Where Experimentation Goes Wrong" documentation as the ground
 
 Any claim you make about loss aversion, anchoring, social proof, scarcity, framing effects, or reward mechanics must be grounded by reading and citing the following reference files rather than asserting the underlying principle inline from memory. Those two files already carry the real citations back to the original research and, critically, the dark-patterns boundary for each principle.
 
-- Anchoring, loss aversion, and reward mechanics — read and cite `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/cross-domain/behavioral-economics.md`.
-- Social proof, scarcity, and framing effects — read and cite `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/cross-domain/social-influence-persuasion.md`.
+- Anchoring, loss aversion, and reward mechanics — read and cite `behavioral-economics.md` in the `design` plugin's `neuro-design` references (dispatch `design:neuro-design-reviewer` for the grounded read).
+- Social proof, scarcity, and framing effects — read and cite `social-influence-persuasion.md` in the `design` plugin's `neuro-design` references (same dispatch).
 
-For example, if a launch plan leans on scarcity to drive signups, the honest sourcing is a citation into `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/cross-domain/social-influence-persuasion.md` for why scarcity moves behavior and where that file draws the line into manipulation — not a paraphrase you invent for this one artifact. Loss-aversion framing in a referral loop's copy gets the same treatment: cite `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/cross-domain/behavioral-economics.md` rather than restating the principle as if it were common knowledge.
+For example, if a launch plan leans on scarcity to drive signups, the honest sourcing is a citation into `social-influence-persuasion.md` in the `design` plugin for why scarcity moves behavior and where that file draws the line into manipulation — not a paraphrase you invent for this one artifact. Loss-aversion framing in a referral loop's copy gets the same treatment: cite `behavioral-economics.md` (design plugin) rather than restating the principle as if it were common knowledge.
+
+If the `design` plugin is not installed, say that the claim is ungrounded and label it [UNVERIFIED] rather than asserting the principle from memory.
 
 Never propose a dark pattern under any framing — fake urgency or fake scarcity (a countdown timer that resets, a "3 left in stock" that isn't true), confirm-shaming copy, or hidden opt-outs. A real deadline (an actual price change, an actual cohort cutoff) is fair urgency to communicate plainly; an invented one is not, and the difference is whether the claim in the copy is true.
 

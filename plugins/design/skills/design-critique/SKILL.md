@@ -20,4 +20,4 @@ For a live session use `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/critique-a
 
 ## Delegate
 
-Dispatch `design-critic` for an isolated critique. For attention, load, perception, motor, emotion or reading evidence use the `skills` plugin's `neuro-design-audit` (inline) or `neuro-design-reviewer` (isolated) — optional peers; if absent, say the evidence limit.
+Dispatch `design-critic` for an isolated critique. For attention, load, perception, motor, emotion or reading evidence use `neuro-design-audit` (inline, on an existing UI) or the `neuro-design-reviewer` agent (isolated) — both in this plugin.

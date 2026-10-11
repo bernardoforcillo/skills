@@ -1,7 +1,7 @@
 {
   "name": "design",
-  "description": "A senior/staff design team — seven desks (design lead, critic, reviewer, accessibility auditor, design-system steward, content designer, metrics analyst) and twelve skills covering problem framing, research, critique, review, handoff, decision records, WCAG 2.2, DTCG tokens, content design and metrics. Claims carry evidence labels; optional peers in the skills plugin supply neuro-design.",
-  "version": "0.2.0",
+  "description": "A senior/staff design team — seven desks (design lead, critic, reviewer, accessibility auditor, design-system steward, content designer, metrics analyst), twelve process skills (framing, research, critique, review, handoff, decision records, WCAG 2.2, DTCG tokens, content design, metrics), and the neuro-design evidence base (six lenses, an audit skill and a reviewer agent). Claims carry evidence labels.",
+  "version": "0.3.0",
   "author": {
     "name": "Bernardo Forcillo"
   }

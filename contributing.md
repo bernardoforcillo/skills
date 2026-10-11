@@ -11,7 +11,7 @@ redistribute your own copy.
 2. Make your change (a new skill, a fix to an existing agent/skill, a reference-file
    correction, etc.) following the conventions already established in the files around it.
 3. Run `node scripts/check-plugin.mjs` and fix anything it reports. It now also runs
-   `scripts/mechanisms.mjs --test`, which recomputes every figure quoted in the foundations tier
+   `plugins/skills/scripts/mechanisms.mjs --test`, which recomputes every figure quoted in the foundations tier
    and the worked examples from the models they claim to follow from — so editing a number in
    prose without editing the model (or the reverse) fails the check rather than drifting. It checks the invariants
    that drift silently: frontmatter, every path-shaped reference resolving, no orphaned reference
@@ -24,15 +24,15 @@ redistribute your own copy.
    contract — open with `# Foundation: <topic>`, state `**The principle(s) it generates:**` and
    `**The mechanism:**`, and end with a `## When this mechanism is absent` section. The checker
    enforces all four, because a derivation with no voiding condition is an assertion with a
-   better title. If the file makes an arithmetic claim, add the model to `scripts/mechanisms.mjs`
+   better title. If the file makes an arithmetic claim, add the model to `plugins/skills/scripts/mechanisms.mjs`
    and pin the figure in its self-test.
 5. If you changed a skill's description or its advice, consider running the matching eval set in
    `evals/` — the trigger set catches a description that stopped discriminating, and the task set
    catches advice that lost a property it claims.
-6. If your claim carries a number, add the model to `scripts/mechanisms.mjs`, pin the figure in
+6. If your claim carries a number, add the model to `plugins/skills/scripts/mechanisms.mjs`, pin the figure in
    its self-test, and attack it in [docs/red-team.md](docs/red-team.md) before trusting it — that
    file's standing instruction is that a claim with a number is untested until someone has tried to
-   compute it wrong. `node scripts/mechanisms.mjs sweep <fn> <argIndex> <from> <to> <steps> <args>`
+   compute it wrong. `node plugins/skills/scripts/mechanisms.mjs sweep <fn> <argIndex> <from> <to> <steps> <args>`
    is the fastest way to find the parameter range where a conclusion flips.
 7. If your change adds a desk, an agent, or a checker rule, update
    [docs/self-audit.md](docs/self-audit.md) — its numbers and its open-items table are what stop

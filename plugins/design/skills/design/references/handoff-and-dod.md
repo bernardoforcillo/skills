@@ -37,4 +37,4 @@ Done means all of:
 - [ ] Tokens only; any new token went through the system process.
 - [ ] Decisions that were hard to reverse have a record.
 - [ ] Design QA done in the built product, not only in the file.
-- [ ] A neuro-design pass was considered for any attention-heavy, high-stakes or high-traffic flow (`skills:neuro-design`, optional peer).
+- [ ] A neuro-design pass was considered for any attention-heavy, high-stakes or high-traffic flow (`neuro-design`, or `neuro-design-audit` on an existing UI).

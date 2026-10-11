@@ -48,7 +48,7 @@ enterprise cycles, gated distribution.
 - **Directly implementable work skips this skill.** If the ask is copy, SEO, or events work with
   no strategy step needed, don't dispatch `growth-marketer` — use `/gtm` instead.
 - **In-product flow or retention work routes elsewhere.** For flow, activation, or retention
-  mechanics inside the product itself, dispatch `neuro-design-reviewer` or use the
+  mechanics inside the product itself, dispatch `design:neuro-design-reviewer` or use the
   `neuro-design`/`neuro-design-audit` skills instead of this one.
 - **Evidence standard comes from the operating model.** Whatever this skill's strategy work
   proposes is held to `operating-model`'s `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/evidence-and-experimentation.md`: a primary

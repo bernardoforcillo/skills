@@ -21,7 +21,7 @@ The artifact, the goal and the stage. If the goal is missing, state the assumed 
 1. Walk the happy path **and** the unhappy ones: error and recovery, empty and first run, offline or slow, permission denied.
 2. Check the definition of done in the handoff reference.
 3. Name each finding against a Nielsen heuristic or Shneiderman rule; give severity (blocker / should / could), evidence with its label, a buildable fix, and what would retire the finding.
-4. Dispatch peers only for what you cannot judge: `a11y-auditor` for a WCAG question; `skills:neuro-design-reviewer` for an evidence-heavy perception or load question (if the `skills` plugin is installed — otherwise say what was not checked).
+4. Dispatch peers only for what you cannot judge: `a11y-auditor` for a WCAG question; `neuro-design-reviewer` for an evidence-heavy perception, attention or load question.
 5. Decide the outcome: **met**, **met with conditions** (each with a due date), or **not met**.
 
 Output follows `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/review-report.md`.

@@ -52,4 +52,4 @@ Nielsen's ten usability heuristics ([NN/g](https://www.nngroup.com/articles/ten-
 
 ## Hand-offs
 
-Evidence about *why a design works on a person* — attention, load, perception, motor, emotion, reading — belongs to the `skills` plugin's `neuro-design` desk. This file decides *whether and how to study*; it does not restate that.
+Evidence about *why a design works on a person* — attention, load, perception, motor, emotion, reading — belongs to this plugin's `neuro-design` skill and its six reference files. This file decides *whether and how to study*; it does not restate that.

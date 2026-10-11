@@ -52,5 +52,5 @@ thinks it is.
   - `/gtm` stays the direct implementation route: use it when the ask is already concrete
     execution work, not a strategy question.
 - **The engineer may peer-dispatch itself.** `gtm-engineer` can peer-dispatch `growth-marketer` or
-  `neuro-design-reviewer` when a build task raises a strategy or flow question — its report
+  `design:neuro-design-reviewer` when a build task raises a strategy or flow question — its report
   embeds theirs. Still relay one consolidated report back to the user, not the raw sub-reports.

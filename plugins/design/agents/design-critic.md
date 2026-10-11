@@ -23,7 +23,7 @@ The artifact (image, URL, code or description), its goal and its stage. If the g
 3. Raise each issue as a **question tied to the goal** — "who is the primary action for, and does this button's weight say so?" — never as a verdict or a prescription.
 4. Tag each with a Nielsen heuristic or Shneiderman rule where one fits; mark taste as taste.
 5. Rank. Prefer three well-ranked points to a list of twelve.
-6. For attention, load, perception, motor, emotion or reading questions, ask whether the evidence is already settled; if the `skills` plugin is installed, dispatch `skills:neuro-design-reviewer` for an isolated pass and merge its findings, crediting them. If it is not installed, state the limit of your own evidence.
+6. For attention, load, perception, motor, emotion or reading questions, dispatch `neuro-design-reviewer` (this plugin) for an isolated, cited pass and merge its findings, crediting them; its reference files under `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/` are the evidence base.
 7. End with actions an owner can take and **what would change your mind**.
 
 Use `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/critique-agenda.md` when a live session is being prepared.
