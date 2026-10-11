@@ -7,8 +7,13 @@ operating model that decides what's worth building at all. Single-maintainer, so
 
 ## What's inside
 
-### Design
-- Skill `design` (its own plugin, `design`) — one entry point for visual UI, design systems and the UX process; structure only for now (three outline reference files), handing evidence questions to `skills:neuro-design` when that plugin is installed.
+### Design (plugin `design`)
+A senior/staff design team as a separate plugin. Every claim carries an evidence label (verified, secondary, UNVERIFIED, inference, house convention, folklore), and the plugin lists the circulating figures it refuses to repeat (e.g. WCAG 2.4.13 is AAA, not AA). Research basis: [docs/research/senior-staff-design-team.md](docs/research/senior-staff-design-team.md).
+
+- Skill `design` — the front door: routes a question to the right desk and loads the shared rules.
+- Skills `problem-framing`, `research-planning`, `design-critique`, `design-review`, `design-handoff`, `decision-record`, `a11y-audit`, `design-tokens`, `design-system-governance`, `content-design`, `design-metrics`, `design-ladder`.
+- Agents `design-lead`, `design-critic`, `design-reviewer`, `a11y-auditor`, `design-system-steward`, `content-designer`, `design-metrics-analyst` — dispatched for an isolated pass.
+- Optional peers in the `skills` plugin: `neuro-design`, `neuro-design-audit`, `neuro-design-reviewer` supply the attention, load and perception evidence. Without them the design desks say what was not checked.
 
 ### Neuro-design
 Design decisions and reviews grounded in cited neuroscience/cognitive-science research

@@ -24,10 +24,29 @@ graph LR
     neuro-design
     neuro-design-audit
     design
+    problem-framing
+    research-planning
+    design-critique
+    design-review
+    design-handoff
+    decision-record
+    a11y-audit
+    design-tokens
+    design-system-governance
+    content-design
+    design-metrics
+    design-ladder
     commit
   end
 
   subgraph Agents["Agents (dispatched by skills or peers)"]
+    design-lead
+    design-critic
+    design-reviewer
+    a11y-auditor
+    design-system-steward
+    content-designer
+    design-metrics-analyst
     librarian
     product-strategist
     growth-marketer
@@ -84,10 +103,40 @@ graph LR
   reliability-engineer -->|the fix is structural| software-architect
   reliability-engineer -->|does this investment rank| operating-partner
   reliability-engineer -->|the fix has become a diff| code-reviewer
+
+  design -.router.-> design-lead
+  problem-framing --> design-lead
+  research-planning --> design-lead
+  decision-record --> design-lead
+  design-ladder --> design-lead
+  design-critique --> design-critic
+  design-review --> design-reviewer
+  design-handoff --> design-reviewer
+  a11y-audit --> a11y-auditor
+  design-tokens --> design-system-steward
+  design-system-governance --> design-system-steward
+  content-design --> content-designer
+  design-metrics --> design-metrics-analyst
+
+  design-lead -->|critique against a goal| design-critic
+  design-lead -->|does it meet the bar| design-reviewer
+  design-lead -->|WCAG 2.2 conformance| a11y-auditor
+  design-lead -->|tokens, components, governance| design-system-steward
+  design-lead -->|words, states, i18n| content-designer
+  design-lead -->|is the evidence enough| design-metrics-analyst
+  design-lead -.attention, load, perception.-> neuro-design-reviewer
+  design-lead -.worth building.-> operating-partner
+  design-lead -.architectural shape.-> software-architect
+  design-critic -.isolated evidence pass.-> neuro-design-reviewer
+  design-reviewer -->|a WCAG question| a11y-auditor
+  design-reviewer -.evidence-heavy perception question.-> neuro-design-reviewer
+  design-system-steward -->|a WCAG question| a11y-auditor
+  design-system-steward -.component structure in code.-> software-architect
+  design-metrics-analyst -.expected-value ranking.-> operating-partner
 ```
 
 **Terminal nodes** — no outgoing peer-dispatch of their own: `software-architect`,
-`neuro-design-reviewer`, `librarian`.
+`neuro-design-reviewer`, `librarian`, `a11y-auditor`, `content-designer`.
 
 **The External nodes are not guaranteed to exist.** `superpowers:brainstorming`,
 `superpowers:systematic-debugging` and `feature-dev:code-architect` belong to other plugins, and a
@@ -132,7 +181,7 @@ to approve.
 
 ## The loop-until-converged pattern
 
-Ten skills/agents in this plugin do review, audit, reduction, or traceability work where a
+Fourteen skills/agents in this plugin do review, audit, reduction, or traceability work where a
 single pass isn't always the end of the story: findings come back, some get fixed, and the fix should be re-checked
 rather than taken on faith. Each uses the same four-step shape (the same shape
 `superpowers:subagent-driven-development`'s fix-loop already uses for reviewing implementation
@@ -163,3 +212,7 @@ back to this section — the four-step shape itself isn't restated per adopter.
 | `modeling` skill (traceability loop) | Every model element traces to a stated requirement or question, **and** every stated requirement appears in at least one view — both directions | 3 rounds | List the orphans in both directions, delete elements nothing requires, add the minimum for unmodelled requirements, re-check |
 | `system-modeler` agent (modeling mode) | Same bidirectional traceability, over the model set it just produced | 3 rounds | Same per-round action, then re-emit and re-validate the affected diagrams |
 | `lollapalooza` skill (Step 3) | Two or more independent lenses agree, or every applicable lens from the lens-mapping table has been dispatched | Bounded by the lens-mapping table itself (6 agent lenses plus the two gap-discipline entries) rather than a separate number | Dispatch the next applicable undispatched lens, re-run the synthesis |
+| `design-review` skill | No `blocker` finding remains | 3 rounds | Apply approved fixes, re-review the changed work and what it touches |
+| `a11y-audit` skill | No `blocker` finding remains | 3 rounds | Apply approved fixes, re-run the nine-step procedure |
+| `design-reviewer` agent (review mode) | No `blocker` finding remains (should/could may survive) | 3 rounds | Apply the approved fixes for the current blockers, re-review the changed work *and* what it touches |
+| `a11y-auditor` agent (audit mode) | No `blocker` finding remains | 3 rounds | Apply the approved fixes, then re-run the whole nine-step procedure — a focus-order fix can break a screen-reader path |

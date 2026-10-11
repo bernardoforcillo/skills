@@ -13,7 +13,7 @@
     {
       "name": "design",
       "source": "./plugins/design",
-      "description": "A design desk — visual UI direction, design systems, and the UX process before visuals; hands evidence questions to the skills plugin's neuro-design"
+      "description": "A senior/staff design team — seven desks (design lead, critic, reviewer, accessibility auditor, design-system steward, content designer, metrics analyst) and twelve skills covering problem framing, research, critique, review, handoff, decision records, WCAG 2.2, DTCG tokens, content design and metrics. Claims carry evidence labels; optional peers in the skills plugin supply neuro-design."
     }
   ]
 }

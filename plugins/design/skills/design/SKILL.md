@@ -1,47 +1,76 @@
 ---
 name: design
-description: Use when designing or reshaping a product's look, feel, or flow — visual direction (typography, color, layout, spacing), a design system (tokens, components, theming), or the UX process before visuals (flows, information architecture, wireframes). Routes to the right reference and hands evidence questions to neuro-design.
+description: Use when starting or steering any design work — it routes to the right desk of a senior/staff design team (problem framing, research, critique, review, handoff, decision records, accessibility, tokens and governance, content, metrics, level diagnostics) and loads the shared evidence rules. Visual direction, design systems and UX process live here as references. Hands attention, load and perception evidence to neuro-design in the skills plugin.
 ---
 
 # Design
 
-One entry point for design work, split by the question being asked. This skill decides which area applies and loads that reference on demand; it does not restate what `skills:neuro-design` already carries.
+A senior/staff design team is mostly a discipline of **evidence and decision**: the right problem, the right method, a bar that is stated, and claims labelled by how well they are grounded. This skill is the front door. It decides which desk the question belongs to and loads the shared rules once.
 
-> **Status: structure only.** The three reference files below define scope, inputs and checklists. Their bodies are outlines to be filled in; until then, say so rather than inventing guidance.
+## Always read first
 
-## When to use
+`${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-and-corrections.md` — the evidence labels (verified, secondary, UNVERIFIED, inference, house convention, folklore) and the figures that circulate but do not survive checking (for example: **WCAG 2.4.13 is AAA, not AA**; the 100× defect-cost multiplier and the "automation finds 30–40%" figure are unsupported). Every claim a desk makes carries a label.
 
-- Choosing or changing the visual direction of a UI.
-- Setting up or extending a design system.
-- Working out flows and structure before anything is drawn.
+## Route by the question
 
-For *why* a design works on a person (attention, load, perception, motor, emotion, reading), use `skills:neuro-design`. For reviewing an existing UI, use `skills:neuro-design-audit`.
+| The question | Skill | Agent (isolated pass) |
+| :--- | :--- | :--- |
+| Is this the right problem; what do we do first | `problem-framing` | `design-lead` |
+| Which research method, how many users | `research-planning` | `design-lead` |
+| What does this work need next | `design-critique` | `design-critic` |
+| Does it meet the bar to ship | `design-review` | `design-reviewer` |
+| Can an engineer build it without asking | `design-handoff` | `design-reviewer` |
+| A hard-to-reverse choice to record | `decision-record` | `design-lead` |
+| WCAG 2.2 conformance | `a11y-audit` | `a11y-auditor` |
+| Tokens, DTCG, theming | `design-tokens` | `design-system-steward` |
+| Contribution, versioning, system health | `design-system-governance` | `design-system-steward` |
+| Words, errors, empty states, i18n | `content-design` | `content-designer` |
+| How will we know it worked | `design-metrics` | `design-metrics-analyst` |
+| What level is this work, in scope terms | `design-ladder` | `design-lead` |
 
-## Pick the area
+## The shared references
 
-| The question is about | Reference file |
+| Reference | Holds |
 | :--- | :--- |
-| How it should look and feel — type, color, layout, spacing, motion | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/visual-ui.md` |
-| How it stays consistent — tokens, component APIs, theming, light/dark | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/design-systems.md` |
-| What it should do before it looks like anything — flows, IA, wireframes | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/ux-process.md` |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/roles-and-levels.md` | Level axes, staff archetypes, DACI, the seven desks |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/ux-process.md` | Gates and exit criteria, framing, methods, evidence ladder |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/critique-and-review.md` | Critique vs review vs approval; heuristics |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/handoff-and-dod.md` | Spec contents, state matrix, definition of done |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/decision-records.md` | The design decision record |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/accessibility-wcag22.md` | WCAG 2.2 criteria, thresholds, audit procedure |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/tokens-dtcg.md` | The DTCG format and token architecture |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/design-systems.md` | Component API, governance, health |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/content-design.md` | Errors, voice, forms, i18n |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/metrics-and-impact.md` | HEART process, SUS, experiments, prioritisation |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/visual-ui.md` | Type, colour, layout, targets, motion, interaction |
 
-Work usually runs `ux-process` → `visual-ui` → `design-systems`; start at the first one the user has not already settled.
+Templates live in `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/`: brief, research-plan, critique-agenda, review-report, handoff-spec, decision-record, a11y-audit-report, measurement-plan, ds-contribution.
+
+## How the team works together
+
+```
+brief (design-lead) → research → critique ⇄ iterate → review (outcome) → approval (one Approver)
+                                      ↘ a11y audit · content · tokens · metrics run alongside
+```
+
+Critique is input, review is a verdict on the bar, approval is one person's signature. Keep the three apart.
 
 ## Inputs to gather first
 
-1. **The goal** — the primary user task or business objective. Every choice is judged against it.
-2. **Context** — platform, audience, existing brand or system, and the stack (default: Vite + React).
-3. **Constraints** — deadlines, accessibility targets, what must not change.
+1. **The goal** — the user task or business objective; every choice is judged against it.
+2. **Stage** — discovery, alpha, beta or live; the bar differs.
+3. **Context and constraints** — platform, audience, brand or system, stack, hard versus soft constraints.
 
-If the goal is missing, ask before proposing anything.
+If the goal is missing, ask — or state the assumed goal at the top and carry on.
 
-## Hand-offs
+## Hand-offs to the `skills` plugin (optional peers)
 
-These live in the `skills` plugin, so they are optional peers — this plugin works alone.
+Evidence for *why a design works on a person* — attention, cognitive load, perception, motor, emotion, reading — → `skills:neuro-design` (build) and `skills:neuro-design-audit` (review), or the `skills:neuro-design-reviewer` agent for an isolated pass. Component structure in code → `skills:software-architecture`. Whether the work is worth its cost → `skills:operating-model`.
 
-- Evidence for a choice (hierarchy, color contrast, target size, reading) → `skills:neuro-design`, the reference file for that lens.
-- Isolated critique of the result → `skills:neuro-design-reviewer` agent.
-- Component or module structure in code → `skills:software-architecture`.
-- Whether the work is worth doing at all → `skills:operating-model`.
+These live in another plugin and may not be installed. If the `skills` plugin is absent, do the step inline from the reference files here and say what was skipped.
 
-If the `skills` plugin is not installed, do the step inline from its description and say what was skipped.
+## Rules
+
+- A blocker needs **verified** grounds; weaker is a question.
+- Never promote a house convention to a standard; never repeat a figure from the corrections table.
+- Never recommend a pattern that works only because the user does not notice it.
