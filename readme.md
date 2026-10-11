@@ -1,4 +1,4 @@
-# copilot
+# skills
 
 Bernardo's personal Claude Code plugin — a set of skills, agents, a Stop hook, and a project
 reference base covering design review, project knowledge management, commit discipline,
@@ -157,23 +157,23 @@ and which practices don't transfer below a certain scale.
 
 ```
 /plugin marketplace add ./
-/plugin install copilot@copilot
+/plugin install skills@skills
 ```
 
 **From GitHub**, once this repo is pushed (no remote is configured yet — swap in the real path):
 
 ```
-/plugin marketplace add bernardoforcillo/copilot
-/plugin install copilot@copilot
+/plugin marketplace add bernardoforcillo/skills
+/plugin install skills@skills
 ```
 
 Verify with `/plugin` (Installed / Errors tabs) or `/plugin list`.
 
 ## Usage
 
-Skills are invoked scoped to the plugin: `/copilot:<skill-name>` — e.g. `/copilot:commit`,
-`/copilot:prd <feature>`, `/copilot:software-architecture`. Agents are dispatched the same
-way, `@copilot:<agent-name>` (e.g. `@copilot:software-architect`) or via the `Agent` tool with
+Skills are invoked scoped to the plugin: `/skills:<skill-name>` — e.g. `/skills:commit`,
+`/skills:prd <feature>`, `/skills:software-architecture`. Agents are dispatched the same
+way, `@skills:<agent-name>` (e.g. `@skills:software-architect`) or via the `Agent` tool with
 `subagent_type: "<agent-name>"`.
 
 ### Modeling
