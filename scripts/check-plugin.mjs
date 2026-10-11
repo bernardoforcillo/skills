@@ -10,15 +10,23 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const pluginRoot = join(root, 'plugins', 'skills');
-// skills/, agents/, hooks/ and plugin.json ship in the plugin; docs/, evals/, scripts/ stay at the repo root.
+const pluginRoots = readdirSync(join(root, 'plugins'))
+  .map((d) => join(root, 'plugins', d))
+  .filter((d) => statSync(d).isDirectory());
+// skills/, agents/, hooks/ and plugin.json ship in a plugin under plugins/<name>/; docs/, evals/, scripts/ stay at the repo root.
 const PLUGIN_DIRS = ['skills', 'agents', 'hooks', '.claude-plugin/plugin.json'];
 const abs = (...parts) => {
   const rel = join(...parts);
   const norm = rel.replaceAll(sep, '/');
-  return PLUGIN_DIRS.some((d) => norm === d || norm.startsWith(d + '/')) ? join(pluginRoot, rel) : join(root, rel);
+  if (!PLUGIN_DIRS.some((d) => norm === d || norm.startsWith(d + '/'))) return join(root, rel);
+  return join(pluginRoots.find((r) => existsSync(join(r, rel))) ?? pluginRoots[0], rel);
 };
-const fromAbs = (a) => (a.startsWith(pluginRoot) ? relative(pluginRoot, a) : relative(root, a));
+// A directory several plugins each contribute to (skills/, agents/): the union of their entries.
+const list = (dir) => {
+  const roots = abs(dir) === join(root, dir) ? [root] : pluginRoots;
+  return [...new Set(roots.flatMap((r) => (existsSync(join(r, dir)) ? readdirSync(join(r, dir)) : [])))];
+};
+const fromAbs = (a) => relative(pluginRoots.find((x) => a.startsWith(x)) ?? root, a);
 // core.autocrlf checks files out with CRLF on Windows; every pattern below assumes LF.
 const read = (file) => readFileSync(file, 'utf8').replaceAll('\r\n', '\n');
 // Repo-relative paths are slash-joined on every platform: prose references use '/'.
@@ -27,7 +35,7 @@ const problems = [];
 const p = (msg) => problems.push(msg);
 
 const walk = (dir, out = []) => {
-  for (const entry of readdirSync(abs(dir))) {
+  for (const entry of list(dir)) {
     const rel = j(dir, entry);
     if (rel.startsWith('docs/superpowers')) continue; // gitignored scratch plans, not part of the plugin
     if (statSync(abs(rel)).isDirectory()) walk(rel, out);
@@ -36,10 +44,10 @@ const walk = (dir, out = []) => {
   return out;
 };
 
-const skills = readdirSync(abs('skills')).filter((d) =>
+const skills = list('skills').filter((d) =>
   statSync(abs('skills', d)).isDirectory()
 );
-const agents = readdirSync(abs('agents'))
+const agents = list('agents')
   .filter((f) => f.endsWith('.md'))
   .map((f) => f.replace(/\.md$/, ''));
 
@@ -364,12 +372,14 @@ try {
 }
 
 // --- (12) plugin.json and marketplace.json stay in sync --------------------
-const plugin = JSON.parse(read(abs('.claude-plugin/plugin.json')));
 const market = JSON.parse(read(join(root, '.claude-plugin/marketplace.json')));
-const entry = (market.plugins || []).find((x) => x.name === plugin.name);
-if (!entry) p(`marketplace.json: no entry for plugin '${plugin.name}'`);
-else if (entry.description !== plugin.description)
-  p('marketplace.json: description out of sync with plugin.json');
+for (const r of pluginRoots) {
+  const plugin = JSON.parse(read(join(r, '.claude-plugin/plugin.json')));
+  const entry = (market.plugins || []).find((x) => x.name === plugin.name);
+  if (!entry) p(`marketplace.json: no entry for plugin '${plugin.name}'`);
+  else if (entry.description !== plugin.description)
+    p(`marketplace.json: description for '${plugin.name}' is out of sync with its plugin.json`);
+}
 
 if (problems.length) {
   console.error(`plugin: ${problems.length} problem(s):`);

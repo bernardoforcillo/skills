@@ -8,7 +8,7 @@ operating model that decides what's worth building at all. Single-maintainer, so
 ## What's inside
 
 ### Design
-- Skill `design` — one entry point for visual UI, design systems and the UX process; structure only for now (three outline reference files), handing evidence questions to `neuro-design`.
+- Skill `design` (its own plugin, `design`) — one entry point for visual UI, design systems and the UX process; structure only for now (three outline reference files), handing evidence questions to `skills:neuro-design` when that plugin is installed.
 
 ### Neuro-design
 Design decisions and reviews grounded in cited neuroscience/cognitive-science research
@@ -161,6 +161,7 @@ and which practices don't transfer below a certain scale.
 ```
 /plugin marketplace add ./
 /plugin install skills@bernardoforcillo
+/plugin install design@bernardoforcillo
 ```
 
 **From GitHub**, once this repo is pushed (no remote is configured yet — swap in the real path):
@@ -168,6 +169,7 @@ and which practices don't transfer below a certain scale.
 ```
 /plugin marketplace add bernardoforcillo/skills
 /plugin install skills@bernardoforcillo
+/plugin install design@bernardoforcillo
 ```
 
 Verify with `/plugin` (Installed / Errors tabs) or `/plugin list`.

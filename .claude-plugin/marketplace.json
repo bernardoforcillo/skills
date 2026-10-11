@@ -9,6 +9,11 @@
       "name": "skills",
       "source": "./plugins/skills",
       "description": "Bernardo's skills — neuro-design review, a memory wiki, commit discipline, a product/GTM desk, a software-architecture desk for Go + Vite/React + Kubernetes projects, an operating-model desk for what's worth building and what complexity it's allowed to buy, and a modeling desk that carries a design from UML views through to contribution per unit"
+    },
+    {
+      "name": "design",
+      "source": "./plugins/design",
+      "description": "A design desk — visual UI direction, design systems, and the UX process before visuals; hands evidence questions to the skills plugin's neuro-design"
     }
   ]
 }

@@ -5,7 +5,7 @@ description: Use when designing or reshaping a product's look, feel, or flow —
 
 # Design
 
-One entry point for design work, split by the question being asked. This skill decides which area applies and loads that reference on demand; it does not restate what `neuro-design` already carries.
+One entry point for design work, split by the question being asked. This skill decides which area applies and loads that reference on demand; it does not restate what `skills:neuro-design` already carries.
 
 > **Status: structure only.** The three reference files below define scope, inputs and checklists. Their bodies are outlines to be filled in; until then, say so rather than inventing guidance.
 
@@ -15,7 +15,7 @@ One entry point for design work, split by the question being asked. This skill d
 - Setting up or extending a design system.
 - Working out flows and structure before anything is drawn.
 
-For *why* a design works on a person (attention, load, perception, motor, emotion, reading), use `neuro-design`. For reviewing an existing UI, use `neuro-design-audit`.
+For *why* a design works on a person (attention, load, perception, motor, emotion, reading), use `skills:neuro-design`. For reviewing an existing UI, use `skills:neuro-design-audit`.
 
 ## Pick the area
 
@@ -37,9 +37,11 @@ If the goal is missing, ask before proposing anything.
 
 ## Hand-offs
 
-- Evidence for a choice (hierarchy, color contrast, target size, reading) → `neuro-design`, the reference file for that lens.
-- Isolated critique of the result → `neuro-design-reviewer` agent.
-- Component or module structure in code → `software-architecture`.
-- Whether the work is worth doing at all → `operating-model`.
+These live in the `skills` plugin, so they are optional peers — this plugin works alone.
 
-If a hand-off target is not installed, do the step inline from its description and say what was skipped.
+- Evidence for a choice (hierarchy, color contrast, target size, reading) → `skills:neuro-design`, the reference file for that lens.
+- Isolated critique of the result → `skills:neuro-design-reviewer` agent.
+- Component or module structure in code → `skills:software-architecture`.
+- Whether the work is worth doing at all → `skills:operating-model`.
+
+If the `skills` plugin is not installed, do the step inline from its description and say what was skipped.
