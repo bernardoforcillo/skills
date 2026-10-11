@@ -7,6 +7,9 @@ operating model that decides what's worth building at all. Single-maintainer, so
 
 ## What's inside
 
+### Design
+- Skill `design` — one entry point for visual UI, design systems and the UX process; structure only for now (three outline reference files), handing evidence questions to `neuro-design`.
+
 ### Neuro-design
 Design decisions and reviews grounded in cited neuroscience/cognitive-science research
 (attention, cognitive load, perception & color, motor interaction, emotion, typography).

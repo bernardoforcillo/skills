@@ -23,6 +23,7 @@ graph LR
     modeling
     neuro-design
     neuro-design-audit
+    design
     commit
   end
 
