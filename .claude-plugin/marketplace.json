@@ -1,12 +1,12 @@
 {
-  "name": "skills",
+  "name": "bernardoforcillo",
   "owner": {
     "name": "Bernardo Forcillo"
   },
   "description": "Bernardo's personal Claude Code plugins",
   "plugins": [
     {
-      "name": "bernardoforcillo",
+      "name": "skills",
       "source": "./",
       "description": "Bernardo's skills — neuro-design review, a memory wiki, commit discipline, a product/GTM desk, a software-architecture desk for Go + Vite/React + Kubernetes projects, an operating-model desk for what's worth building and what complexity it's allowed to buy, and a modeling desk that carries a design from UML views through to contribution per unit"
     }

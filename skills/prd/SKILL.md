@@ -37,8 +37,8 @@ stated fallback, and the report says which path was taken:
 
 | Missing | Fallback |
 | --- | --- |
-| `superpowers:brainstorming` | Write the technical spec inline from the approved PRD, and dispatch `bernardoforcillo:software-architect` for the shape review that brainstorming would otherwise have driven |
-| `feature-dev:code-architect` | Dispatch `bernardoforcillo:software-architect` for the feasibility read instead; it carries the scaling and code-organization references and can answer the same question at lower resolution |
+| `superpowers:brainstorming` | Write the technical spec inline from the approved PRD, and dispatch `skills:software-architect` for the shape review that brainstorming would otherwise have driven |
+| `feature-dev:code-architect` | Dispatch `skills:software-architect` for the feasibility read instead; it carries the scaling and code-organization references and can answer the same question at lower resolution |
 | `superpowers:systematic-debugging` | Handle the bug case directly — reproduce, isolate, fix, add the regression test — and record it per `${CLAUDE_PLUGIN_ROOT}/skills/operating-model/references/reliability-and-incidents.md` |
 
 Check availability before promising a hand-off, not after the PRD is approved.

@@ -109,7 +109,7 @@ Any time a tool you'd want turns out to be unavailable or unauthorized, note tha
 ## If `feature-dev:code-architect` isn't installed
 
 The Prototype step dispatches it for the feasibility read. It belongs to another plugin and may not
-be there. Fallback: dispatch `bernardoforcillo:software-architect` with the same question — it carries the
+be there. Fallback: dispatch `skills:software-architect` with the same question — it carries the
 scaling and code-organization references and answers the feasibility question at lower resolution —
 and say in the report which of the two produced the read, so the user can weigh it accordingly.
 Never present a feasibility section that no agent actually produced.
