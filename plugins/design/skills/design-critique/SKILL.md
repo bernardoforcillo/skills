@@ -21,3 +21,7 @@ For a live session use `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/critique-a
 ## Delegate
 
 Dispatch `design-critic` for an isolated critique. For attention, load, perception, motor, emotion or reading evidence use `neuro-design-audit` (inline, on an existing UI) or the `neuro-design-reviewer` agent (isolated) — both in this plugin.
+
+## Evidence layer
+
+Run the lens pass inside the critique: frame each question with the checklist of its lens (`${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`; lenses under `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/`), cite bibliography keys, and use the `neuro-design-audit` method for an existing UI.

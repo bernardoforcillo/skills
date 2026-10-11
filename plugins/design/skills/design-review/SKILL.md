@@ -16,3 +16,7 @@ A review is a verdict on the bar, modelled on a service-assessment panel. It is 
 5. Fix and re-review under the loop-until-converged shape: converged when no blocker remains; cap three rounds; report the residual.
 
 Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/critique-and-review.md`. Fill `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/review-report.md`. Delegate an isolated pass to the `design-reviewer` agent.
+
+## Evidence layer
+
+Score the six lenses (`Pass` / `Minor` / `Blocking`) and map them to findings with the rule in `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`: a lens `Blocking` is a **blocker** only when a verified threshold is also crossed, otherwise a **should**. Use the `neuro-design-audit` method inline, or dispatch `neuro-design-reviewer` for an isolated pass.

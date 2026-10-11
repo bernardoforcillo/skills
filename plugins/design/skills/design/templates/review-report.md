@@ -3,6 +3,18 @@
 Goal (or assumed goal): <...>
 Stage: <alpha | beta | live> · Reviewer: <> · Date: <>
 
+## Lens scores (evidence layer)
+| Lens | Pass / Minor / Blocking | One line, with bibliography key | Mapped to |
+| :--- | :--- | :--- | :--- |
+| Attention & hierarchy | | | blocker / should / could / none |
+| Cognitive load & memory | | | |
+| Perception, Gestalt & color | | | |
+| Motor & interaction | | | |
+| Emotion & memory | | | |
+| Reading & typography | | | |
+
+A lens `Blocking` is a **blocker** only when a verified threshold is also crossed; otherwise a **should**.
+
 ## Outcome
 **met | met with conditions (due <date>) | not met**
 <One paragraph: the deciding reason.>

@@ -17,3 +17,7 @@ Words are interface. Verified rules are labelled as such; the rest is practice.
 6. Offer the **string**, the string it replaces, and why.
 
 Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/content-design.md`. Delegate to `content-designer`.
+
+## Evidence layer
+
+Read the reading, cognitive-load and psycholinguistics references before drafting (`${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`); check waiting and numeric-risk states against their cross-domain files.

@@ -1,6 +1,6 @@
 ---
 name: design
-description: Use when starting or steering any design work — it routes to the right desk of a senior/staff design team (problem framing, research, critique, review, handoff, decision records, accessibility, tokens and governance, content, metrics, level diagnostics) and loads the shared evidence rules. Visual direction, design systems and UX process live here as references. Hands attention, load and perception evidence to neuro-design in the skills plugin.
+description: Use when starting or steering any design work — it routes to the right desk of a senior/staff design team (problem framing, research, critique, review, handoff, decision records, accessibility, tokens and governance, content, metrics, level diagnostics) and loads the shared evidence rules, with the neuro-design lenses as the evidence layer under every desk. Visual direction, design systems and UX process live here as references. Hands attention, load and perception evidence to neuro-design in the skills plugin.
 ---
 
 # Design
@@ -27,13 +27,14 @@ A senior/staff design team is mostly a discipline of **evidence and decision**: 
 | Words, errors, empty states, i18n | `content-design` | `content-designer` |
 | How will we know it worked | `design-metrics` | `design-metrics-analyst` |
 | What level is this work, in scope terms | `design-ladder` | `design-lead` |
-| Why a design works on a person — attention, load, perception, motor, emotion, reading (build) | `neuro-design` | `neuro-design-reviewer` |
-| Same evidence, applied to an existing UI | `neuro-design-audit` | `neuro-design-reviewer` |
+| *Evidence layer, used by every desk above*: why a design works on a person — building | `neuro-design` | `neuro-design-reviewer` |
+| *Evidence layer*: the same lenses applied to an existing UI | `neuro-design-audit` | `neuro-design-reviewer` |
 
 ## The shared references
 
 | Reference | Holds |
 | :--- | :--- |
+| `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md` | How the neuro-design lenses feed each desk; lens verdict → review severity |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/roles-and-levels.md` | Level axes, staff archetypes, DACI, the seven desks |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/ux-process.md` | Gates and exit criteria, framing, methods, evidence ladder |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/critique-and-review.md` | Critique vs review vs approval; heuristics |
@@ -46,7 +47,7 @@ A senior/staff design team is mostly a discipline of **evidence and decision**: 
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/metrics-and-impact.md` | HEART process, SUS, experiments, prioritisation |
 | `${CLAUDE_PLUGIN_ROOT}/skills/design/references/visual-ui.md` | Type, colour, layout, targets, motion, interaction |
 
-The `neuro-design` skill carries its own six lens references, a bibliography, cross-domain files and the perceptual-limits foundation under `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/`; it is the evidence base for every question about how a design lands on a person.
+**neuro-design is not a separate desk; it is the evidence layer under all of them.** Its six lens references, bibliography, twenty cross-domain files and the perceptual-limits foundation sit under `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/`. Each desk reads the lenses that bear on its question as part of its normal method, and a lens verdict becomes a review finding by the rule in `evidence-layer.md`. Reach for `neuro-design` directly only when the question is purely "how will this land on a person".
 
 Templates live in `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/`: brief, research-plan, critique-agenda, review-report, handoff-spec, decision-record, a11y-audit-report, measurement-plan, ds-contribution.
 
@@ -69,7 +70,7 @@ If the goal is missing, ask — or state the assumed goal at the top and carry o
 
 ## Hand-offs to the `skills` plugin (optional peers)
 
-Neuro-design lives here. These two do not:
+These do not live here:
 
 Component structure in code → `skills:software-architecture`; whether the work is worth its cost → `skills:operating-model`.
 

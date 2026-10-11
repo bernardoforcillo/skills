@@ -23,3 +23,7 @@ Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/ux-process.md` and `${CLAUD
 ## Delegate
 
 For an isolated pass or a deep research plan, dispatch the `design-lead` agent. Jobs-to-be-Done and the d.school point-of-view format are [UNVERIFIED] as published methods — use them as prompts only.
+
+## Evidence layer
+
+Before committing a team to a frame, test it against the constants in `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/foundations/perceptual-limits.md` (via `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`) — a problem that assumes users hold more than a few chunks, or notice what is not salient, is a mis-framed problem.

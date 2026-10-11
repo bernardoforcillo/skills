@@ -83,3 +83,7 @@ Apply these by default; open the matching reference file when a decision needs d
 1. Identify which lenses the current design decision touches (often 2–3).
 2. Read those reference files and apply their `## Design checklist`.
 3. When you make a trade-off, name the principle behind it (and its citation key) so the reasoning is auditable.
+
+## Within the design team
+
+This skill is the evidence layer of the `design` plugin's desks, not a stand-alone tool. `design-critic`, `design-reviewer`, `content-designer`, `a11y-auditor`, `design-system-steward` and `design-metrics-analyst` read the lens files that bear on their question; the mapping, and the rule for turning a lens verdict into a review finding (a lens `Blocking` is a **blocker** only when a verified threshold is also crossed, otherwise a **should**), are in `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`. Findings keep their bibliography keys and are labelled **cited**.

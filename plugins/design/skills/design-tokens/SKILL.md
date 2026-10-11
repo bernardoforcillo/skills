@@ -18,3 +18,7 @@ DTCG **2025.10** is the first stable version (2025-10-28): a Final Community Gro
 7. Tooling: Style Dictionary v4 supports DTCG only partially; full 2025.10 is planned for v5. Figma-variables export and Tokens Studio details are [UNVERIFIED].
 
 Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/tokens-dtcg.md`. Delegate to the `design-system-steward` agent for an isolated review.
+
+## Evidence layer
+
+Ground a proposed scale in the matching lens (colour and contrast, type, targets, motion) via `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md` instead of a blog.

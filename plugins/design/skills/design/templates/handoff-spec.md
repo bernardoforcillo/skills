@@ -39,3 +39,4 @@ Used: <...> · Requested (no token exists): <...>
 
 ## 10. Design QA (staging)
 - [ ] Matches spec in the built product · [ ] a11y audit no open blocker · [ ] Copy final · [ ] Signed off by: <>
+- Lens check on the built flow: target size and spacing · state and error feedback · reading and typography · waiting states

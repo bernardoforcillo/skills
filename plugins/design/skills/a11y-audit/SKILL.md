@@ -22,3 +22,7 @@ Target **WCAG 2.2 AA**. No single tool determines conformance; a clean automated
 Severity: blocker / major / minor (house convention). A blocker needs a criterion you **read**, not recalled. Report 2.4.13 only as a best-practice note — it is AAA.
 
 Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/accessibility-wcag22.md`. Fill `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/a11y-audit-report.md`. Delegate to the `a11y-auditor` agent for an isolated audit; it re-tests under the loop-until-converged shape.
+
+## Evidence layer
+
+WCAG says what must hold; `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md` points to the neurodiversity and motor references that say who is affected when it does not. Use them to explain impact and to rank within a severity, never to invent a conformance failure.

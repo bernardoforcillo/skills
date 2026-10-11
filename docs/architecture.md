@@ -118,6 +118,9 @@ graph LR
   content-design --> content-designer
   design-metrics --> design-metrics-analyst
 
+  design-critique -.lens evidence.-> neuro-design
+  design-review -.runs the lens pass.-> neuro-design-audit
+  design-handoff -.lens check on the built flow.-> neuro-design
   design-lead -->|critique against a goal| design-critic
   design-lead -->|does it meet the bar| design-reviewer
   design-lead -->|WCAG 2.2 conformance| a11y-auditor
@@ -131,6 +134,10 @@ graph LR
   design-reviewer -->|a WCAG question| a11y-auditor
   design-reviewer -->|evidence-heavy perception question| neuro-design-reviewer
   design-system-steward -->|a WCAG question| a11y-auditor
+  design-system-steward -->|evidence behind a scale| neuro-design-reviewer
+  content-designer -.reading and load evidence.-> neuro-design
+  a11y-auditor -.who is affected.-> neuro-design
+  design-metrics-analyst -.influence vs manipulation.-> neuro-design
   design-system-steward -.component structure in code.-> software-architect
   design-metrics-analyst -.expected-value ranking.-> operating-partner
 ```

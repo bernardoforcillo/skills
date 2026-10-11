@@ -1,6 +1,6 @@
 # Visual craft: type, colour, layout, targets, motion
 
-Numbers here are quotable because their sources are named. Conventions are labelled as conventions. Evidence about *why* these work on a human (acuity, load, attention) lives in this plugin's `neuro-design` skill.
+Numbers here are quotable because their sources are named. Conventions are labelled as conventions. Evidence about *why* these work on a human is the evidence layer (`evidence-layer.md`): typography → `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/typography-and-reading.md`; colour and contrast → `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/perception-gestalt-color.md`; targets, spacing and motion → `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/motor-and-interaction.md`; hierarchy → `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/attention-and-hierarchy.md`.
 
 ## Typography
 

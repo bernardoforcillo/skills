@@ -86,3 +86,7 @@ cap is 3 rounds. Each round: apply the user-approved fixes for the current `Bloc
 findings, then re-run the six-lens audit against the updated artifact. At the cap, report the
 remaining `Blocking`/`Minor` findings as residual — never report an artifact as passing while
 a `Blocking` finding is still open.
+
+## Within the design team
+
+This skill is the evidence layer of the `design` plugin's desks, not a stand-alone tool. `design-critic`, `design-reviewer`, `content-designer`, `a11y-auditor`, `design-system-steward` and `design-metrics-analyst` read the lens files that bear on their question; the mapping, and the rule for turning a lens verdict into a review finding (a lens `Blocking` is a **blocker** only when a verified threshold is also crossed, otherwise a **should**), are in `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`. Findings keep their bibliography keys and are labelled **cited**.

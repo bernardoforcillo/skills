@@ -15,3 +15,7 @@ A handoff is complete when every state can be built without a question. A blank 
 4. Do **design QA in the built product** before sign-off.
 
 Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/handoff-and-dod.md`. "Redlines versus tokens" has no primary source; the default here is tokens. Delegate an isolated check to the `design-reviewer` agent.
+
+## Evidence layer
+
+Before sign-off, run the lens checklists on the built flow: target sizes and spacing (motor), state and error feedback (cognitive load), reading and typography, and waiting states. Pointers in `${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`.

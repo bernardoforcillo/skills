@@ -13,20 +13,8 @@ A senior/staff design team as a separate plugin. Every claim carries an evidence
 - Skill `design` — the front door: routes a question to the right desk and loads the shared rules.
 - Skills `problem-framing`, `research-planning`, `design-critique`, `design-review`, `design-handoff`, `decision-record`, `a11y-audit`, `design-tokens`, `design-system-governance`, `content-design`, `design-metrics`, `design-ladder`.
 - Agents `design-lead`, `design-critic`, `design-reviewer`, `a11y-auditor`, `design-system-steward`, `content-designer`, `design-metrics-analyst` — dispatched for an isolated pass.
+- **Evidence layer: `neuro-design`** — skill `neuro-design` (apply six lenses — attention, cognitive load, perception & colour, motor, emotion, reading — while building, over `perceptual-limits.md`, the constants the lenses are guidance for), skill `neuro-design-audit` (the same lenses on an existing UI) and agent `neuro-design-reviewer` (isolated, cited second opinion). Every desk reads the lenses that bear on its question; a lens verdict becomes a review finding by a stated rule.
 - Optional peers in the `skills` plugin: `operating-partner`, `software-architect`, `operating-model` and `software-architecture`. Without them the design desks say what was not checked. The product and growth desks in `skills` call `design:neuro-design-reviewer` the same way.
-
-### Neuro-design (also in the `design` plugin)
-Design decisions and reviews grounded in cited neuroscience/cognitive-science research
-(attention, cognitive load, perception & color, motor interaction, emotion, typography).
-
-- Skill `neuro-design` — apply the six lenses while building a UI, over
-  `references/foundations/perceptual-limits.md`: the fixed constants the lenses are guidance for
-  (acuity window, working-memory chunks, serial attention, Fitts's and Hick–Hyman's logarithms, the
-  100 ms / 1 s / 10 s thresholds) and the signal-detection argument that makes an
-  attention-claiming element which is usually not worth attending to a negative for the whole
-  interface.
-- Skill `neuro-design-audit` — review an existing UI against the same lenses, inline.
-- Agent `neuro-design-reviewer` — delegate an isolated, structured second-opinion critique.
 
 ### Memory wiki
 Gives any project a committed, git-versioned knowledge base (`.claude/memory/`) distinct
@@ -61,7 +49,7 @@ DoorDash's experimentation platform).
   in the denominator of both the plateau and lifetime value, cost per acquisition as a rising curve
   rather than a number, and payback horizon as a financing constraint.
 - Agent `gtm-engineer` / skill `gtm` — the doer: copy, SEO, analytics, signal-based GTM automation.
-- In-product UX questions route to `neuro-design-reviewer` above instead of a separate agent.
+- In-product UX questions route to the `design` plugin's `neuro-design-reviewer` (an optional peer) instead of a separate agent here.
 
 ### Software architecture
 - Skill `software-architecture` with five reference files: three technology-agnostic (scaling/

@@ -8,6 +8,7 @@ Every design claim carries the strength of its grounds. A senior team's output i
 | :--- | :--- | :--- |
 | **verified** | Read in a primary source (a spec, a handbook, the author's own page); the source is named. | State as fact; block a release on it. |
 | **secondary** | Reported by a summary, a vendor blog or a course; primary not read. | Support, never decide; say "reported". |
+| **cited** | Backed by a bibliography key in the neuro-design references; the plugin has not re-verified the underlying paper. | Support a **should**; explain a blocker whose threshold is separately **verified**. Alone, never a blocker. |
 | **[UNVERIFIED]** | Recalled or searched but not confirmed. | Raise as a question; never as a finding. |
 | **[TRAINING-MEMORY]** | From model memory with no source in hand. | Same as `[UNVERIFIED]`. |
 | **inference** | Reasoned from verified material; the step is stated. | Recommend, with the step visible. |
@@ -16,7 +17,7 @@ Every design claim carries the strength of its grounds. A senior team's output i
 
 Rules that follow from the labels:
 
-1. A **blocking** finding needs **verified** grounds. Anything weaker is at most a should-fix, stated as a question.
+1. A **blocking** finding needs **verified** grounds (a spec, a platform guideline, a measured effect). A lens verdict alone is **cited**, not verified — see `evidence-layer.md`. Anything weaker is at most a should-fix, stated as a question.
 2. Never promote a convention to a standard. "Design review outcomes are met / met with conditions / not met" is a house convention borrowed from GOV.UK's assessment colours; say so.
 3. When a figure matters to the decision and is not verified, the fix is to find the source or to label it — not to round it into confidence.
 4. Name the observation that would retire a finding. A finding with no way to be wrong is taste.

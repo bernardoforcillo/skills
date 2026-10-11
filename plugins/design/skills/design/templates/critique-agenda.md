@@ -9,6 +9,7 @@ Presenter: <> · Facilitator (rotates): <> · Recorder: <> · Critiquers: <>
 - Goal and stage: <what this must achieve; is it a sketch or a candidate?>
 - The specific question for the room: <...>
 - Materials: <links>
+- Lens checklists in play (attention, load, perception, motor, emotion, reading): <which, and why they bear on the goal>
 
 ## Run of show
 1. Presenter frames goal, stage and question — 3 min

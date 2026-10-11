@@ -17,3 +17,7 @@ A number without its source is a rumour; a correlation is not a cause.
 6. **RICE** (Reach × Impact × Confidence / Effort) to start an argument; name its limits.
 
 Fill `${CLAUDE_PLUGIN_ROOT}/skills/design/templates/measurement-plan.md`. Read `${CLAUDE_PLUGIN_ROOT}/skills/design/references/metrics-and-impact.md`. Delegate to `design-metrics-analyst`.
+
+## Evidence layer
+
+Use the behavioral-economics and social-influence references (`${CLAUDE_PLUGIN_ROOT}/skills/design/references/evidence-layer.md`) to separate influence the user would endorse from manipulation; do not measure the latter as a success.
