@@ -13,7 +13,7 @@ Stage: <alpha | beta | live> · Reviewer: <> · Date: <>
 | Emotion & memory | | | |
 | Reading & typography | | | |
 
-A lens `Blocking` is a **blocker** only when a verified threshold is also crossed; otherwise a **should**.
+A lens `Blocking` is a **blocker** only when a verified threshold is also crossed — read in the standard or platform guideline, not merely cited by a lens file. Otherwise it is a **should**, written as a question with the observation that would upgrade or retire it. Computed values are labelled inference (computed); defects visible in the artifact are verified (observed).
 
 ## Outcome
 **met | met with conditions (due <date>) | not met**

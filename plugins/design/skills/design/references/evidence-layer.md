@@ -31,6 +31,14 @@ The two vocabularies differ on purpose, and the mapping is a **house convention*
 
 Why not pass `Blocking` straight through: the lens files give cited mechanisms, which are strong grounds for *a direction*, but a review blocker stops a release and needs **verified** grounds (`evidence-and-corrections.md`). The reviewer's own rule — withdraw a finding when the underlying constant does not apply (an expert recalling instead of searching, a non-visual channel, a rare irreversible action where friction is the design, a population small enough to measure directly) — carries over unchanged.
 
+## What counts as "verified" in the mapping
+
+A lens file that *mentions* a threshold is a pointer, not a source. A threshold is **verified** when you have read it in the standard or platform guideline itself (the WCAG Understanding page, the Apple HIG or Material page). If you have not, cite the lens key and label the finding **cited** — it can still be a **should**.
+
+- **Computed values** (a contrast ratio worked out from hex codes, a target size inferred from CSS): label **inference (computed)** with the method, and name a tool run — a contrast checker, a measured tap target — as the observation that retires it. The *threshold* may be verified while the *measurement* is inference; say both.
+- **Observed defects** (the form has no submit control; a countdown no script drives): what is directly observable in the artifact is **verified (observed)** for its existence. Whether it is a blocker still depends on the goal — here, a form that cannot be submitted blocks the stated goal outright.
+- **Platform guidelines vs WCAG:** a size can fail an Apple/Material floor and still pass WCAG 2.5.8 through its spacing exception. Say which one carries the blocker.
+
 ## Citations
 
 A finding grounded in a lens file carries its bibliography key (for example `[YANT-84]`) and the label **cited**: backed by a bibliography entry, not re-verified by this plugin. It may support a **should** and may explain a **blocker** whose threshold is separately verified. It does not, alone, make a blocker. Never invent a key; if the lens files do not support a claim, do not make it — say it is outside the evidence.

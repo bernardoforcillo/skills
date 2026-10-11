@@ -7,6 +7,8 @@ Every design claim carries the strength of its grounds. A senior team's output i
 | Label | Means | May be used to |
 | :--- | :--- | :--- |
 | **verified** | Read in a primary source (a spec, a handbook, the author's own page); the source is named. | State as fact; block a release on it. |
+| **inference (computed)** | A value worked out from the artifact (a contrast ratio from hex codes, a size from CSS) against a threshold you have read. | State with the method; retire with a tool run. |
+| **verified (observed)** | Directly observable in the artifact itself (no submit control, a timer no script drives). | State the defect as fact; judge severity against the goal. |
 | **secondary** | Reported by a summary, a vendor blog or a course; primary not read. | Support, never decide; say "reported". |
 | **cited** | Backed by a bibliography key in the neuro-design references; the plugin has not re-verified the underlying paper. | Support a **should**; explain a blocker whose threshold is separately **verified**. Alone, never a blocker. |
 | **[UNVERIFIED]** | Recalled or searched but not confirmed. | Raise as a question; never as a finding. |
