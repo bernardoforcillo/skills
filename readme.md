@@ -157,23 +157,23 @@ and which practices don't transfer below a certain scale.
 
 ```
 /plugin marketplace add ./
-/plugin install skills@skills
+/plugin install bernardoforcillo@skills
 ```
 
 **From GitHub**, once this repo is pushed (no remote is configured yet — swap in the real path):
 
 ```
 /plugin marketplace add bernardoforcillo/skills
-/plugin install skills@skills
+/plugin install bernardoforcillo@skills
 ```
 
 Verify with `/plugin` (Installed / Errors tabs) or `/plugin list`.
 
 ## Usage
 
-Skills are invoked scoped to the plugin: `/skills:<skill-name>` — e.g. `/skills:commit`,
-`/skills:prd <feature>`, `/skills:software-architecture`. Agents are dispatched the same
-way, `@skills:<agent-name>` (e.g. `@skills:software-architect`) or via the `Agent` tool with
+Skills are invoked scoped to the plugin: `/bernardoforcillo:<skill-name>` — e.g. `/bernardoforcillo:commit`,
+`/bernardoforcillo:prd <feature>`, `/bernardoforcillo:software-architecture`. Agents are dispatched the same
+way, `@bernardoforcillo:<agent-name>` (e.g. `@bernardoforcillo:software-architect`) or via the `Agent` tool with
 `subagent_type: "<agent-name>"`.
 
 ### Modeling

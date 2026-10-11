@@ -78,7 +78,7 @@ Triggering held near-perfect specificity and low recall across two quite differe
 texts. That's consistent with how skills load: Claude consults one when the task isn't something it
 can already handle, and most of these prompts are advice-shaped questions it answers directly. The
 practical consequence is worth stating plainly — **these desks earn their keep when invoked
-(`/skills:operating-model`, `/skills:modeling`) or dispatched as agents, more than as ambient
+(`/bernardoforcillo:operating-model`, `/bernardoforcillo:modeling`) or dispatched as agents, more than as ambient
 skills that fire on their own.** A description rewrite is unlikely to change that, which is why
 the reverted attempt is recorded here rather than repeated.
 
@@ -100,7 +100,7 @@ property the tier exists to buy, and it is the one most likely to erode silently
 
 `software-architecture-tasks.json` is a task set with no trigger counterpart. That's deliberate:
 the structural finding above says these desks earn their keep when invoked or dispatched, and the
-code-review standard is reached through `/skills:software-architecture` or the
+code-review standard is reached through `/bernardoforcillo:software-architecture` or the
 `software-architect` agent rather than by ambient triggering. Measuring its output quality is
 still worth doing; measuring a triggering rate for it is not.
 
