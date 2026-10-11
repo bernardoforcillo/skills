@@ -56,3 +56,7 @@ of a separately-licensed patch.
 There's one maintainer. Expect PRs to be reviewed and merged (or declined) at their
 discretion — this keeps the plugin coherent as a single, personally-maintained tool rather
 than a design-by-committee one.
+
+## Editing the neuro-design lens files
+
+The design agents carry the lens checklists they need inside their own files, generated from the lens files. After editing a lens file under `plugins/design/skills/neuro-design/references/`, run `node scripts/neuro-core.mjs --write`; `node scripts/check-plugin.mjs` fails while any agent is out of date.

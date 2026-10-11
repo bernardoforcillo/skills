@@ -380,6 +380,16 @@ try {
   p(`scripts/mechanisms.mjs: self-test could not run (${err.message})`);
 }
 
+// --- (11b) design agents carry the current neuro-design checklists -------------
+// The agents embed the lens checklists they need; they are generated, so a lens edit that is
+// not re-synced would leave an agent applying stale guidance. Fix with: node scripts/neuro-core.mjs --write
+try {
+  const core = await import(pathToFileURL(join(root, 'scripts', 'neuro-core.mjs')).href);
+  for (const [agent, why] of core.stale()) p(`agents/${agent}.md: ${why} — run node scripts/neuro-core.mjs --write`);
+} catch (err) {
+  p(`scripts/neuro-core.mjs: could not run (${err.message})`);
+}
+
 // --- (12) plugin.json and marketplace.json stay in sync --------------------
 const market = JSON.parse(read(join(root, '.claude-plugin/marketplace.json')));
 for (const r of pluginRoots) {

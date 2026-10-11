@@ -4,6 +4,10 @@ Process tells a team *how to decide*; the neuro-design references tell it *what 
 
 The knowledge base lives in `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/references/`: six lens files (each ends in a `## Design checklist`), a bibliography whose keys citations resolve to, twenty cross-domain files, and a foundation, `perceptual-limits.md`, holding the constants the lenses are guidance for (the ~2° acuity window, ~4 chunks of working memory, serial attention, Fitts's and Hick–Hyman's logarithms, the 100 ms / 1 s / 10 s thresholds, and the signal-detection argument that an attention-claiming element which is usually not worth attending to is a negative for the whole interface).
 
+## Built into the agents
+
+Each design agent carries the lens checklists it needs inside its own file, under a **Neuro-design core (built in)** block, so the desk works without a lookup. The blocks are generated from the lens files by `scripts/neuro-core.mjs` and checked by `scripts/check-plugin.mjs`: edit a lens file, then run `node scripts/neuro-core.mjs --write`, and the check fails until you do. The lens files stay the source of truth and hold the mechanism, the evidence and the bibliography keys; the built-in block holds the guidance.
+
 ## Which lens bears on which desk
 
 | Desk | Always read | Read when the artifact calls for it |
