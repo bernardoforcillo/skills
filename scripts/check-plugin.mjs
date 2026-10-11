@@ -6,37 +6,46 @@
 // that claim to describe the whole plugin (the dispatch graph and the
 // loop-until-converged adopters table) but are maintained by hand.
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
-import { dirname, join, relative, resolve } from 'node:path';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const pluginRoot = join(root, 'plugins', 'skills');
+// skills/, agents/, hooks/ and plugin.json ship in the plugin; docs/, evals/, scripts/ stay at the repo root.
+const PLUGIN_DIRS = ['skills', 'agents', 'hooks', '.claude-plugin/plugin.json'];
+const abs = (...parts) => {
+  const rel = join(...parts);
+  const norm = rel.replaceAll(sep, '/');
+  return PLUGIN_DIRS.some((d) => norm === d || norm.startsWith(d + '/')) ? join(pluginRoot, rel) : join(root, rel);
+};
+const fromAbs = (a) => (a.startsWith(pluginRoot) ? relative(pluginRoot, a) : relative(root, a));
 const problems = [];
 const p = (msg) => problems.push(msg);
 
 const walk = (dir, out = []) => {
-  for (const entry of readdirSync(join(root, dir))) {
+  for (const entry of readdirSync(abs(dir))) {
     const rel = join(dir, entry);
-    if (statSync(join(root, rel)).isDirectory()) walk(rel, out);
+    if (statSync(abs(rel)).isDirectory()) walk(rel, out);
     else if (entry.endsWith('.md')) out.push(rel);
   }
   return out;
 };
 
-const skills = readdirSync(join(root, 'skills')).filter((d) =>
-  statSync(join(root, 'skills', d)).isDirectory()
+const skills = readdirSync(abs('skills')).filter((d) =>
+  statSync(abs('skills', d)).isDirectory()
 );
-const agents = readdirSync(join(root, 'agents'))
+const agents = readdirSync(abs('agents'))
   .filter((f) => f.endsWith('.md'))
   .map((f) => f.replace(/\.md$/, ''));
 
 // --- (1) frontmatter -------------------------------------------------------
 for (const skill of skills) {
   const file = join('skills', skill, 'SKILL.md');
-  if (!existsSync(join(root, file))) {
+  if (!existsSync(abs(file))) {
     p(`${file}: missing (every skill directory needs a SKILL.md)`);
     continue;
   }
-  const fm = readFileSync(join(root, file), 'utf8').match(/^---\n([\s\S]*?)\n---\n/);
+  const fm = readFileSync(abs(file), 'utf8').match(/^---\n([\s\S]*?)\n---\n/);
   if (!fm) {
     p(`${file}: missing frontmatter block`);
     continue;
@@ -50,7 +59,7 @@ for (const skill of skills) {
 }
 for (const agent of agents) {
   const file = join('agents', `${agent}.md`);
-  const fm = readFileSync(join(root, file), 'utf8').match(/^---\n([\s\S]*?)\n---\n/);
+  const fm = readFileSync(abs(file), 'utf8').match(/^---\n([\s\S]*?)\n---\n/);
   if (!fm) {
     p(`${file}: missing frontmatter block`);
     continue;
@@ -69,20 +78,20 @@ for (const agent of agents) {
 // exists anywhere in the plugin at all.
 const INTERNAL = /^(\$\{CLAUDE_PLUGIN_ROOT\}\/|\.\.\/|references\/|foundations\/|templates\/|skills\/|agents\/|docs\/|hooks\/|scripts\/)/;
 const docFiles = [...walk('skills'), ...walk('agents'), ...walk('docs')];
-const IGNORED_ROOTS = readFileSync(join(root, '.gitignore'), 'utf8')
+const IGNORED_ROOTS = readFileSync(abs('.gitignore'), 'utf8')
   .split('\n')
   .map((l) => l.trim().replace(/\/$/, ''))
   .filter((l) => l && !l.startsWith('#'));
 
 const pluginFiles = new Map(); // basename -> [repo-relative paths]
-for (const f of [...docFiles, ...walk('hooks').concat(existsSync(join(root, 'scripts')) ? walk('scripts') : [])]) {
+for (const f of [...docFiles, ...walk('hooks').concat(existsSync(abs('scripts')) ? walk('scripts') : [])]) {
   const base = f.split('/').pop();
   pluginFiles.set(base, [...(pluginFiles.get(base) || []), f]);
 }
 for (const skill of skills) {
   const t = join('skills', skill, 'templates');
-  if (!existsSync(join(root, t))) continue;
-  for (const entry of readdirSync(join(root, t))) {
+  if (!existsSync(abs(t))) continue;
+  for (const entry of readdirSync(abs(t))) {
     pluginFiles.set(entry, [...(pluginFiles.get(entry) || []), join(t, entry)]);
   }
 }
@@ -90,7 +99,7 @@ for (const skill of skills) {
 const candidates = (fromFile, ref) => {
   const fromDir = dirname(fromFile);
   if (ref.startsWith('${CLAUDE_PLUGIN_ROOT}/')) return [ref.replace('${CLAUDE_PLUGIN_ROOT}/', '')];
-  const out = [relative(root, resolve(root, fromDir, ref)), ref];
+  const out = [fromAbs(resolve(abs(fromDir), ref)), ref];
   // A skill-relative path (references/x.md) may be written from a file deeper in
   // the skill, so also try it against the skill root.
   const parts = fromDir.split('/');
@@ -99,7 +108,7 @@ const candidates = (fromFile, ref) => {
 };
 
 for (const file of docFiles) {
-  const text = readFileSync(join(root, file), 'utf8');
+  const text = readFileSync(abs(file), 'utf8');
   for (const m of text.matchAll(/`([^`\s]+\.(?:md|mjs|sh|json))`/g)) {
     const ref = m[1];
     // A bare filename is the repo's shorthand for "that reference file", resolved
@@ -108,7 +117,7 @@ for (const file of docFiles) {
     if (/[<>*]/.test(ref)) continue; // a path template, not a file
     if (ref.startsWith('.claude/')) continue; // a target project's own wiki
     if (IGNORED_ROOTS.some((ig) => ref.startsWith(ig))) continue;
-    if (candidates(file, ref).some((t) => existsSync(join(root, t)))) continue;
+    if (candidates(file, ref).some((t) => existsSync(abs(t)))) continue;
     const base = ref.split('/').pop();
     const elsewhere = [...new Set(pluginFiles.get(base) || [])];
     if (elsewhere.length) {
@@ -122,10 +131,10 @@ for (const file of docFiles) {
 }
 
 // --- (3) no orphaned reference files ---------------------------------------
-const allText = docFiles.map((f) => readFileSync(join(root, f), 'utf8')).join('\n');
+const allText = docFiles.map((f) => readFileSync(abs(f), 'utf8')).join('\n');
 for (const skill of skills) {
   const refDir = join('skills', skill, 'references');
-  if (!existsSync(join(root, refDir))) continue;
+  if (!existsSync(abs(refDir))) continue;
   for (const ref of walk(refDir)) {
     const name = ref.split('/').pop();
     if (!allText.includes(name)) p(`${ref}: orphan — no skill or agent mentions it`);
@@ -133,7 +142,7 @@ for (const skill of skills) {
 }
 
 // --- (4) dispatch graph in docs/architecture.md matches what exists ---------
-const arch = readFileSync(join(root, 'docs/architecture.md'), 'utf8');
+const arch = readFileSync(abs('docs/architecture.md'), 'utf8');
 const graph = arch.match(/```mermaid\n([\s\S]*?)```/);
 if (!graph) p('docs/architecture.md: no mermaid dispatch graph found');
 else {
@@ -160,7 +169,7 @@ const adopterRows = [...arch.matchAll(/^\|\s*`([a-z][a-z0-9-]*)`\s*(?:skill|agen
 const adopters = new Set(adopterRows);
 for (const file of docFiles) {
   if (file.startsWith('docs/')) continue;
-  const text = readFileSync(join(root, file), 'utf8');
+  const text = readFileSync(abs(file), 'utf8');
   if (!/loop-until-converged/.test(text)) continue;
   const owner = file.startsWith('agents/')
     ? file.split('/')[1].replace(/\.md$/, '')
@@ -185,7 +194,7 @@ const MERMAID_TYPES = [
   'C4Deployment',
 ];
 for (const file of docFiles) {
-  const lines = readFileSync(join(root, file), 'utf8').split('\n');
+  const lines = readFileSync(abs(file), 'utf8').split('\n');
   let open = null;
   for (const [i, line] of lines.entries()) {
     if (open === null && line.trim() === '```mermaid') {
@@ -203,11 +212,11 @@ for (const file of docFiles) {
 // --- (7) eval sets point at skills that exist ------------------------------
 // Eval files name a skill in their filename (and, for task evals, in a field).
 // A renamed skill silently orphans its evals otherwise.
-if (existsSync(join(root, 'evals'))) {
-  for (const file of readdirSync(join(root, 'evals')).filter((f) => f.endsWith('.json'))) {
+if (existsSync(abs('evals'))) {
+  for (const file of readdirSync(abs('evals')).filter((f) => f.endsWith('.json'))) {
     let parsed;
     try {
-      parsed = JSON.parse(readFileSync(join(root, 'evals', file), 'utf8'));
+      parsed = JSON.parse(readFileSync(abs('evals', file), 'utf8'));
     } catch (err) {
       p(`evals/${file}: not valid JSON (${err.message})`);
       continue;
@@ -244,10 +253,10 @@ const asNumber = (token) => {
   return Object.prototype.hasOwnProperty.call(WORDS, t) ? WORDS[t] : null;
 };
 const countMd = (dir, recursive = false) => {
-  if (!existsSync(join(root, dir))) return 0;
-  return readdirSync(join(root, dir)).reduce((n, entry) => {
+  if (!existsSync(abs(dir))) return 0;
+  return readdirSync(abs(dir)).reduce((n, entry) => {
     const rel = join(dir, entry);
-    if (statSync(join(root, rel)).isDirectory()) return n + (recursive ? countMd(rel, true) : 0);
+    if (statSync(abs(rel)).isDirectory()) return n + (recursive ? countMd(rel, true) : 0);
     return n + (entry.endsWith('.md') ? 1 : 0);
   }, 0);
 };
@@ -259,8 +268,8 @@ const claim = (file, label, stated, actual) => {
 
 for (const skill of skills) {
   const file = join('skills', skill, 'SKILL.md');
-  if (!existsSync(join(root, file))) continue;
-  const text = readFileSync(join(root, file), 'utf8');
+  if (!existsSync(abs(file))) continue;
+  const text = readFileSync(abs(file), 'utf8');
   const heading = text.match(/^##\s+The\s+([A-Za-z-]+|\d+)\s+references\s*$/m);
   if (heading) claim(file, 'reference files', heading[1], countMd(join('skills', skill, 'references')));
   for (const m of text.matchAll(/([A-Za-z-]+|\d+)\s+files under `references\/foundations\/`/g)) {
@@ -276,7 +285,7 @@ if (adopterClaim)
   claim('docs/architecture.md', 'loop adopters', adopterClaim[1], new Set(adopterRows).size);
 
 for (const file of docFiles) {
-  const text = readFileSync(join(root, file), 'utf8');
+  const text = readFileSync(abs(file), 'utf8');
   const worked = text.match(/^([A-Za-z-]+|\d+)\s+end-to-end applications/m);
   if (worked)
     claim(file, 'worked examples', worked[1], [...text.matchAll(/^##\s+\d+\.\s/gm)].length);
@@ -289,10 +298,10 @@ for (const file of docFiles) {
 // wrote it for. A file missing it is an assertion wearing a derivation's title.
 for (const skill of skills) {
   const dir = join('skills', skill, 'references', 'foundations');
-  if (!existsSync(join(root, dir))) continue;
-  for (const entry of readdirSync(join(root, dir)).filter((f) => f.endsWith('.md'))) {
+  if (!existsSync(abs(dir))) continue;
+  for (const entry of readdirSync(abs(dir)).filter((f) => f.endsWith('.md'))) {
     const file = join(dir, entry);
-    const text = readFileSync(join(root, file), 'utf8');
+    const text = readFileSync(abs(file), 'utf8');
     if (!/^# Foundation: /m.test(text)) p(`${file}: does not open with '# Foundation: <topic>'`);
     if (!/\*\*The principles? it generates:\*\*/.test(text))
       p(`${file}: no '**The principle(s) it generates:**' line — a foundation has to say which rule it is under`);
@@ -303,7 +312,7 @@ for (const skill of skills) {
     // The operating-model tier is indexed by that skill's derivation table; a foundation it
     // doesn't reach is unreachable from the desk it belongs to, whatever else mentions it.
     if (skill === 'operating-model') {
-      const skillText = readFileSync(join(root, 'skills', skill, 'SKILL.md'), 'utf8');
+      const skillText = readFileSync(abs('skills', skill, 'SKILL.md'), 'utf8');
       if (!skillText.includes(entry))
         p(`${file}: not referenced from skills/${skill}/SKILL.md (the derivation table is the tier's index)`);
     }
@@ -320,11 +329,11 @@ const CHAIN_EXEMPT = new Set(['provenance.md', 'bibliography.md']);
 for (const skill of skills) {
   const refDir = join('skills', skill, 'references');
   const foundDir = join(refDir, 'foundations');
-  if (!existsSync(join(root, foundDir))) continue;
-  for (const entry of readdirSync(join(root, refDir))) {
+  if (!existsSync(abs(foundDir))) continue;
+  for (const entry of readdirSync(abs(refDir))) {
     if (!entry.endsWith('.md') || CHAIN_EXEMPT.has(entry)) continue;
     const file = join(refDir, entry);
-    const text = readFileSync(join(root, file), 'utf8');
+    const text = readFileSync(abs(file), 'utf8');
     if (!/foundations\/[a-z0-9-]+\.md/.test(text))
       p(`${file}: names no file in foundations/ — the rule it states is reachable only as an assertion`);
   }
@@ -340,7 +349,7 @@ try {
   if (!mechChecks.length) p('scripts/mechanisms.mjs: self-test ran no checks');
   // A model no reference file names is a complication with one call site — its own test.
   // Either the prose that needs it is missing, or the model is.
-  const prose = [...docFiles].map((f) => readFileSync(join(root, f), 'utf8')).join('\n');
+  const prose = [...docFiles].map((f) => readFileSync(abs(f), 'utf8')).join('\n');
   for (const name of Object.keys(mech).filter((k) => k !== 'selfTest')) {
     if (!prose.includes(name))
       p(`scripts/mechanisms.mjs: model '${name}' is named in no reference file — dead model, or missing prose`);
@@ -350,7 +359,7 @@ try {
 }
 
 // --- (12) plugin.json and marketplace.json stay in sync --------------------
-const plugin = JSON.parse(readFileSync(join(root, '.claude-plugin/plugin.json'), 'utf8'));
+const plugin = JSON.parse(readFileSync(abs('.claude-plugin/plugin.json'), 'utf8'));
 const market = JSON.parse(readFileSync(join(root, '.claude-plugin/marketplace.json'), 'utf8'));
 const entry = (market.plugins || []).find((x) => x.name === plugin.name);
 if (!entry) p(`marketplace.json: no entry for plugin '${plugin.name}'`);

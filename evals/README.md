@@ -19,7 +19,7 @@ matches keywords.
 cd <skill-creator path>
 python3 -m scripts.run_eval \
   --eval-set <this repo>/evals/operating-model-trigger.json \
-  --skill-path <this repo>/skills/operating-model \
+  --skill-path <this repo>/plugins/skills/skills/operating-model \
   --runs-per-query 2 --num-workers 3 --timeout 300 --model <session model> --verbose < /dev/null
 ```
 
