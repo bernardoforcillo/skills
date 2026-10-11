@@ -14,7 +14,7 @@ const pluginRoots = readdirSync(join(root, 'plugins'))
   .map((d) => join(root, 'plugins', d))
   .filter((d) => statSync(d).isDirectory());
 // skills/, agents/, hooks/ and plugin.json ship in a plugin under plugins/<name>/; docs/, evals/, scripts/ stay at the repo root.
-const PLUGIN_DIRS = ['skills', 'agents', 'hooks', 'docs/engineering', 'scripts/mechanisms.mjs', '.claude-plugin/plugin.json'];
+const PLUGIN_DIRS = ['skills', 'agents', 'hooks', 'docs/engineering', 'docs/product', 'scripts/mechanisms.mjs', '.claude-plugin/plugin.json'];
 const abs = (...parts) => {
   const rel = join(...parts);
   const norm = rel.replaceAll(sep, '/');
@@ -90,7 +90,7 @@ for (const agent of agents) {
 // and is told apart from a broken internal path by whether a file of that name
 // exists anywhere in the plugin at all.
 const INTERNAL = /^(\$\{CLAUDE_PLUGIN_ROOT\}\/|\.\.\/|references\/|foundations\/|templates\/|skills\/|agents\/|docs\/|hooks\/|scripts\/)/;
-const docFiles = [...walk('skills'), ...walk('agents'), ...walk('docs'), ...walk('docs/engineering')];
+const docFiles = [...walk('skills'), ...walk('agents'), ...walk('docs'), ...walk('docs/engineering'), ...walk('docs/product')];
 const IGNORED_ROOTS = read(abs('.gitignore'))
   .split('\n')
   .map((l) => l.trim().replace(/\/$/, ''))

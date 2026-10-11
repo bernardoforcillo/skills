@@ -28,5 +28,5 @@ someone actually has. A PRD nobody argues with was written too late.
   comes from `${CLAUDE_PLUGIN_ROOT}/skills/modeling/references/profit-modeling.md`.
 - **Growth and go-to-market execution** are `${CLAUDE_PLUGIN_ROOT}/skills/growth/SKILL.md` and
   `${CLAUDE_PLUGIN_ROOT}/skills/gtm/SKILL.md`.
-- **In-product experience questions** route to
-  `${CLAUDE_PLUGIN_ROOT}/skills/neuro-design/SKILL.md`.
+- **In-product experience questions** route to the `design` plugin's `neuro-design` skill (an
+  optional peer; if it is not installed, say the UX lens was not run).

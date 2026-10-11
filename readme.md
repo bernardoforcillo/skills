@@ -204,7 +204,7 @@ deployment — plus the step most modeling guides omit: carrying the model throu
   provider's pricing from memory.
 
 ### Project reference base
-`plugins/skills/docs/engineering/` and `docs/product/` hold the blueprints a project copies into its own docs:
+`plugins/skills/docs/engineering/` and `plugins/skills/docs/product/` hold the blueprints a project copies into its own docs:
 system design and ADR templates, API and data-modeling guides, testing strategy (including the
 size contract that decides what a test may touch), observability and SLOs (golden signals and
 burn-rate alerting), a security baseline (identity, supply chain, build provenance), release and
